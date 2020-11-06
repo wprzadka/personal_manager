@@ -2,7 +2,7 @@ package manager.components;
 
 import java.util.List;
 
-class Task {
+public class Task {
     String type;
     State progresState;
 
