@@ -1,4 +1,4 @@
-package Controler;
+package manager.controler;
 
 public class MainEventsControler {
 }

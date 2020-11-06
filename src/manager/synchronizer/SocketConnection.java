@@ -1,4 +1,4 @@
-package Synchronizer;
+package manager.synchronizer;
 
 public interface SocketConnection {
 }
