@@ -30,24 +30,28 @@ public class DesktopUserInterface implements UserInterface {
         List<Pane> columns = new LinkedList<>();
         for(var name : colNames){
 
-            var column = new VBox();
-
-            column.setBackground(
-                    new Background(
-                            new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)
-                    )
-            );
-            var title = new Text(name);
-            title.setFont(Font.font(null, FontWeight.BOLD, 26));
-
-            column.getChildren().add(title);
-            column.setPrefWidth(width);
-            column.setAlignment(Pos.TOP_CENTER);
-            column.setStyle("-fx-border-style: solid;");
-            columns.add(column);
+            columns.add(createColumn(name));
         }
         layout.getChildren().addAll(columns);
 
         return layout;
+    }
+
+    private VBox createColumn(String name){
+        var column = new VBox();
+
+        column.setBackground(
+                new Background(
+                        new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)
+                )
+        );
+        var title = new Text(name);
+        title.setFont(Font.font(null, FontWeight.BOLD, 26));
+
+        column.getChildren().add(title);
+        column.setPrefWidth(width);
+        column.setAlignment(Pos.TOP_CENTER);
+        column.setStyle("-fx-border-style: solid;");
+        return column;
     }
 }
