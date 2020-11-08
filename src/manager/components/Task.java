@@ -1,8 +1,14 @@
 package manager.components;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Task {
+
+    public Task(){
+        components = new LinkedList<>();
+    }
+
     String type;
     State progresState;
 
@@ -11,7 +17,7 @@ public class Task {
 
     public List<Task> components;
 
-    TaskIterator iterator(){
+    public TaskIterator iterator(){
         return new TaskIterator(this);
     }
 }

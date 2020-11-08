@@ -2,27 +2,29 @@ package manager;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
 
 import manager.ui.UserInterface;
 import manager.ui.DesktopUserInterface;
+import manager.components.Task;
 
 public class ManagerApp extends Application {
 
     private UserInterface ui;
+    private Task mainTask;
     private final int width = 1200;
     private final int height = 900;
 
     public ManagerApp(){
         ui = new DesktopUserInterface(width, height);
+        mainTask = new Task();
     }
 
     @Override
     public void start(Stage stage) {
 
         stage.setTitle("Task Manager");
-        var scene = new Scene(ui.getLayout(), 1200, 900);
-        stage.setScene(scene);
+        stage.setScene(ui.getScene());
+        ui.displayTasks(mainTask.iterator());
         stage.show();
     }
 

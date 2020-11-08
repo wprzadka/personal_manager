@@ -1,16 +1,14 @@
 package manager.components;
 
-import java.util.Iterator;
+import java.util.ListIterator;
 
-class TaskIterator {
+public class TaskIterator {
 
-//    private Task contener;
-    private Iterator<Task> innerIterator;
+    private ListIterator<Task> innerIterator;
 
     //TODO get strategy to iterate over given state/type (?)
     TaskIterator(Task contener){
-//        this.contener = contener;
-        innerIterator = contener.components.iterator();
+        innerIterator = contener.components.listIterator();
     }
 
     boolean hasNext(){
