@@ -5,6 +5,7 @@ import manager.components.Task;
 
 import java.util.List;
 
+// DesignPattern Adapter
 public class RethinkDbAdapter implements DbConnection {
     @Override
     public List<Task> getTasks() {
