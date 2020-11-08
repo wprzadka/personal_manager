@@ -2,11 +2,13 @@ package manager.ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import manager.components.TaskIterator;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,19 +24,18 @@ public class DesktopUserInterface implements UserInterface {
     }
 
     @Override
-    public Pane getLayout(){
+    public Scene getScene(){
 
         Pane layout = new HBox();
         String[] colNames = new String[]{"ToDo", "InProgress", "Done"};
 
         List<Pane> columns = new LinkedList<>();
         for(var name : colNames){
-
             columns.add(createColumn(name));
         }
         layout.getChildren().addAll(columns);
 
-        return layout;
+        return new Scene(layout, width, height);
     }
 
     private VBox createColumn(String name){
@@ -53,5 +54,9 @@ public class DesktopUserInterface implements UserInterface {
         column.setAlignment(Pos.TOP_CENTER);
         column.setStyle("-fx-border-style: solid;");
         return column;
+    }
+
+    public void displayTasks(TaskIterator iter){
+
     }
 }
