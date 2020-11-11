@@ -13,12 +13,12 @@ import manager.components.TaskIterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DesktopUserInterface implements UserInterface {
+public class TableUserInterface implements UserInterface {
 
     private int width;
     private int height;
 
-    public DesktopUserInterface(int width, int height){
+    public TableUserInterface(int width, int height){
         this.width = width;
         this.height = height;
     }

@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import manager.ui.UserInterface;
-import manager.ui.DesktopUserInterface;
+import manager.ui.TableUserInterface;
 import manager.components.Task;
 
 public class ManagerApp extends Application {
@@ -15,7 +15,7 @@ public class ManagerApp extends Application {
     private final int height = 900;
 
     public ManagerApp(){
-        ui = new DesktopUserInterface(width, height);
+        ui = new TableUserInterface(width, height);
         mainTask = new Task();
     }
 
