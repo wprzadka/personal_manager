@@ -3,20 +3,30 @@ package manager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import manager.components.task_visualize.BorderViewDecorator;
+import manager.components.task_visualize.ViewComponent;
+import manager.components.task_visualize.ViewComponentIterator;
 import manager.ui.UserInterface;
 import manager.ui.TableUserInterface;
 import manager.components.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManagerApp extends Application {
 
     private UserInterface ui;
-    private Task mainTask;
+    private List<ViewComponent> tasks;
     private final int width = 1200;
     private final int height = 900;
 
     public ManagerApp(){
         ui = new TableUserInterface(width, height);
-        mainTask = new Task();
+        tasks = new ArrayList<>();
+        var initial = new Task("test");
+        initial.setDescription("initial task, don't care about it");
+        initial.setType("useless");
+        tasks.add(new BorderViewDecorator(initial));
     }
 
     @Override
@@ -24,7 +34,7 @@ public class ManagerApp extends Application {
 
         stage.setTitle("Task Manager");
         stage.setScene(ui.getScene());
-        ui.displayTasks(mainTask.iterator());
+        ui.displayTasks(new ViewComponentIterator(tasks));
         stage.show();
     }
 
