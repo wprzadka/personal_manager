@@ -2,13 +2,13 @@ package manager.components;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import manager.components.task_visualize.ViewComponent;
 
-import javax.swing.*;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Task implements ViewComponent {
 
@@ -64,13 +64,18 @@ public class Task implements ViewComponent {
     @Override
     public Pane draw() {
         var pane = new VBox();
+
+        var typeText = new Text(type);
+        typeText.setFont(Font.font(null, 20));
         var titleText = new Text(title);
-        titleText.setTextAlignment(TextAlignment.CENTER);
+        titleText.setFont(Font.font(null, FontWeight.BOLD, 24));
+        var descriptionText = new Text(description);
+        descriptionText.setFont(Font.font(null, 20));
 
         pane.getChildren().addAll(
-                new Text(type),
+                typeText,
                 titleText,
-                new Text(description)
+                descriptionText
         );
         return pane;
     }

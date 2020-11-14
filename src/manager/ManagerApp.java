@@ -3,6 +3,7 @@ package manager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import manager.components.task_visualize.BackgroundViewDecorator;
 import manager.components.task_visualize.BorderViewDecorator;
 import manager.components.task_visualize.ViewComponent;
 import manager.components.task_visualize.ViewComponentIterator;
@@ -26,7 +27,11 @@ public class ManagerApp extends Application {
         var initial = new Task("test");
         initial.setDescription("initial task, don't care about it");
         initial.setType("useless");
-        tasks.add(new BorderViewDecorator(initial));
+        tasks.add(
+                new BorderViewDecorator(
+                        new BackgroundViewDecorator(
+                            initial
+                )));
     }
 
     @Override

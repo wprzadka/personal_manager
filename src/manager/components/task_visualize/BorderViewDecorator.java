@@ -17,7 +17,7 @@ public class BorderViewDecorator implements ViewComponent {
         layout.setBorder(new Border(new BorderStroke(
                 Color.BLACK,
                 BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY,
+                new CornerRadii(4),
                 BorderWidths.DEFAULT
         )));
         return layout;

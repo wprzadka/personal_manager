@@ -8,8 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import manager.components.TaskIterator;
-import manager.components.task_visualize.ViewComponent;
 import manager.components.task_visualize.ViewComponentIterator;
 
 import java.util.LinkedList;
@@ -54,6 +52,7 @@ public class TableUserInterface implements UserInterface {
 
         column.getChildren().add(title);
         column.setPrefWidth(width);
+        column.setPadding(new Insets(8));
         column.setAlignment(Pos.TOP_CENTER);
         column.setStyle("-fx-border-style: solid;");
         return column;
@@ -61,7 +60,8 @@ public class TableUserInterface implements UserInterface {
 
     public void displayTasks(ViewComponentIterator iter){
         while(iter.hasNext()){
-            columns.get(0).getChildren().add(iter.next().draw());
+            var block = iter.next().draw();
+            columns.get(0).getChildren().add(block);
         }
     }
 }
