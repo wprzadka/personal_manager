@@ -10,12 +10,15 @@ import manager.components.task_visualize.ViewComponentIterator;
 import manager.ui.UserInterface;
 import manager.ui.TableUserInterface;
 import manager.components.Task;
+import manager.database.DbConnection;
+import manager.database.RethinkDbAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerApp extends Application {
 
+    private DbConnection dbConn;
     private UserInterface ui;
     private List<ViewComponent> tasks;
     private final int width = 1200;
@@ -24,14 +27,17 @@ public class ManagerApp extends Application {
     public ManagerApp(){
         ui = new TableUserInterface(width, height);
         tasks = new ArrayList<>();
-        var initial = new Task("test");
-        initial.setDescription("initial task, don't care about it");
-        initial.setType("useless");
-        tasks.add(
-                new BorderViewDecorator(
+
+        dbConn = new RethinkDbAdapter();
+
+        List<Task> tasksData = dbConn.getTasks();
+        for(var data : tasksData){
+            tasks.add(
+                    new BorderViewDecorator(
                         new BackgroundViewDecorator(
-                            initial
-                )));
+                            data
+                    )));
+        }
     }
 
     @Override
@@ -41,6 +47,12 @@ public class ManagerApp extends Application {
         stage.setScene(ui.getScene());
         ui.displayTasks(new ViewComponentIterator(tasks));
         stage.show();
+    }
+
+    @Override
+    public void stop(){
+
+        dbConn.close();
     }
 
     public static void main(String[] args){
