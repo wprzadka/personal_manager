@@ -13,7 +13,7 @@ public class Task implements ViewComponent {
     public String title;
     public String description;
     public String type;
-    private State progressState;
+    public State progressState;
 
     private SubTask subComponents;
 
@@ -57,6 +57,11 @@ public class Task implements ViewComponent {
 
     public boolean needsReview(){
         return progressState.needsReview;
+    }
+
+    @Override
+    public Task getTask(){
+        return this;
     }
 
     @Override

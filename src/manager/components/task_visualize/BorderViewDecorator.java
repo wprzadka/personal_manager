@@ -2,6 +2,7 @@ package manager.components.task_visualize;
 
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import manager.components.Task;
 
 public class BorderViewDecorator implements ViewComponent {
 
@@ -21,5 +22,10 @@ public class BorderViewDecorator implements ViewComponent {
                 BorderWidths.DEFAULT
         )));
         return layout;
+    }
+
+    @Override
+    public Task getTask(){
+        return component.getTask();
     }
 }
