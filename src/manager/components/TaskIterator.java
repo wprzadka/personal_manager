@@ -4,19 +4,18 @@ import java.util.ListIterator;
 
 public class TaskIterator {
 
-    private ListIterator<Task> innerIterator;
+//    private ListIterator<Task> innerIterator;
 
-    //TODO get strategy to iterate over given state/type (?)
-    TaskIterator(Task contener){
-        innerIterator = contener.components.listIterator();
+    TaskIterator(Task container){
+
     }
 
     boolean hasNext(){
-        return innerIterator.hasNext();
+        return false;
     }
 
     Task next(){
-        return innerIterator.next();
+        return null;
     }
 
 }
