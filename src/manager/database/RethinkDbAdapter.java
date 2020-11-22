@@ -2,6 +2,7 @@ package manager.database;
 
 
 import com.rethinkdb.gen.exc.ReqlDriverError;
+import com.rethinkdb.gen.exc.ReqlOpFailedError;
 import com.rethinkdb.gen.exc.ReqlQueryLogicError;
 import com.rethinkdb.net.Result;
 import manager.components.Task;
@@ -25,6 +26,10 @@ public class RethinkDbAdapter implements DbConnection {
         }catch (ReqlDriverError err){
             err.printStackTrace();
         }
+        if(conn != null){
+            createTableIfNotExists("Content", "tasks");
+        }
+
     }
 
     @Override
@@ -35,7 +40,12 @@ public class RethinkDbAdapter implements DbConnection {
         }
         try {
             rows = r.db("Content").table("tasks").run(conn);
-        }catch (ReqlDriverError err){
+        }catch (ReqlOpFailedError err){
+            // try to create table
+            err.printStackTrace();
+            return Collections.emptyList();
+        }
+        catch (ReqlDriverError err){
             err.printStackTrace();
             return Collections.emptyList();
         }
@@ -60,6 +70,9 @@ public class RethinkDbAdapter implements DbConnection {
                                 .with("description", taskToAdd.description)
                                 .with("content", taskToAdd.type)
                 ).run(conn);
+            }catch (ReqlOpFailedError err){
+                // try to create table
+                err.printStackTrace();
             } catch (ReqlQueryLogicError err) {
                 err.printStackTrace();
             }
@@ -70,6 +83,18 @@ public class RethinkDbAdapter implements DbConnection {
     public void close(){
         if(conn != null) {
             conn.close();
+        }
+    }
+
+    private void createTableIfNotExists(String dbName, String tableName){
+        Boolean dbAlreadyExists = (Boolean) r.dbList().contains("Content").run(conn).first();
+        if(!dbAlreadyExists){
+            r.dbCreate("Content").run(conn);
+        }
+        Boolean tableAlreadyExists = (Boolean) r.db("Content").tableList().contains("tasks").run(conn).first();
+//        System.out.println(r.db("Content").tableList().contains("tasks").run(conn));
+        if(!tableAlreadyExists) {
+            r.db("Content").tableCreate("tasks").run(conn);
         }
     }
 }
