@@ -118,7 +118,14 @@ public class TableUserInterface implements UserInterface {
         return button;
     }
 
-    public void displayTasks(ViewComponentIterator iter){
+    public void refreshTasks(ViewComponentIterator iter){
+        for(var col : columns){
+            col.getChildren().clear();
+        }
+        displayTasks(iter);
+    }
+
+    private void displayTasks(ViewComponentIterator iter){
         while(iter.hasNext()){
             var component = iter.next();
             int columnNum = component.getTask().progressState.getStateLevel();

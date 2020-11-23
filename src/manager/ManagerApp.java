@@ -56,7 +56,7 @@ public class ManagerApp extends Application {
 
         stage.setTitle("Task Manager");
         stage.setScene(ui.getScene());
-        ui.displayTasks(new ViewComponentIterator(tasks));
+        ui.refreshTasks(new ViewComponentIterator(tasks));
         stage.show();
     }
 
