@@ -20,9 +20,9 @@ import java.util.List;
 
 public class ManagerApp extends Application {
 
-    private DbConnection dbConn;
-    private UserInterface ui;
-    private List<ViewComponent> tasks;
+    private final DbConnection dbConn;
+    private final UserInterface ui;
+    private final List<ViewComponent> tasks;
     private final int width = 1200;
     private final int height = 900;
 
@@ -58,13 +58,6 @@ public class ManagerApp extends Application {
         stage.setTitle("Task Manager");
         stage.setScene(ui.getScene());
         ui.displayTasks(new ViewComponentIterator(tasks));
-
-//        try {
-//            Button temp = new Button("abcd");
-//        }catch (Throwable e){
-//            e.printStackTrace();
-//        }
-
         stage.show();
     }
 
