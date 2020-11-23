@@ -16,6 +16,7 @@ public class BackgroundViewDecorator extends ViewComponent {
     @Override
     public Pane draw() {
         var layout = component.draw();
+        /*
         layout.setBackground(
                 new Background(
                         new BackgroundFill(
@@ -23,6 +24,8 @@ public class BackgroundViewDecorator extends ViewComponent {
                                 new CornerRadii(4),
                                 Insets.EMPTY)
         ));
+        */
+        layout.setStyle("-fx-background-color: linear-gradient(#3c6478, #2c5468);");
         return layout;
     }
 
