@@ -3,10 +3,17 @@ package manager.components.task_visualize;
 import javafx.scene.layout.Pane;
 import manager.components.Task;
 
-public interface ViewComponent {
-    ViewComponent component = null;
+public abstract class ViewComponent {
 
-    Pane draw();
+    protected ViewComponent component;
 
-    Task getTask();
+    public ViewComponent(ViewComponent component){
+        this.component = component;
+    }
+
+    abstract public Pane draw();
+
+    public Task getTask(){
+        return component.getTask();
+    }
 }

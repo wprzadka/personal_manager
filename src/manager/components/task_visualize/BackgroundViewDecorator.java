@@ -6,14 +6,11 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import manager.components.Task;
 
-public class BackgroundViewDecorator implements ViewComponent {
+public class BackgroundViewDecorator extends ViewComponent {
 
-    ViewComponent component;
-
-    public BackgroundViewDecorator(ViewComponent subComponent){
-        component = subComponent;
+    public BackgroundViewDecorator(ViewComponent component) {
+        super(component);
     }
 
     @Override
@@ -29,8 +26,4 @@ public class BackgroundViewDecorator implements ViewComponent {
         return layout;
     }
 
-    @Override
-    public Task getTask(){
-        return component.getTask();
-    }
 }

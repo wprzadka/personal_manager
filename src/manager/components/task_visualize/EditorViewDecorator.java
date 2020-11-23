@@ -1,23 +1,15 @@
 package manager.components.task_visualize;
 
 import javafx.scene.layout.Pane;
-import manager.components.Task;
 
-public class EditorViewDecorator implements ViewComponent {
+public class EditorViewDecorator extends ViewComponent {
 
-    ViewComponent component;
-
-    public EditorViewDecorator(ViewComponent subComponent){
-        component = subComponent;
+    public EditorViewDecorator(ViewComponent component) {
+        super(component);
     }
 
     @Override
     public Pane draw() {
         return component.draw();
-    }
-
-    @Override
-    public Task getTask(){
-        return component.getTask();
     }
 }

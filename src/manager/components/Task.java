@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import manager.components.task_visualize.ViewComponent;
 
 
-public class Task implements ViewComponent {
+public class Task extends ViewComponent {
 
     public String title;
     public String description;
@@ -18,6 +18,7 @@ public class Task implements ViewComponent {
     private SubTask subComponents;
 
     public Task(String title){
+        super(null);
         this.title = title;
         this.description = "";
         this.type = "";
@@ -25,6 +26,7 @@ public class Task implements ViewComponent {
     }
 
     public Task(){
+        super(null);
         this.title = "";
         this.description = "";
         this.type = "";
