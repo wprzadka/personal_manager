@@ -5,6 +5,7 @@ import com.rethinkdb.gen.exc.ReqlDriverError;
 import com.rethinkdb.gen.exc.ReqlOpFailedError;
 import com.rethinkdb.gen.exc.ReqlQueryLogicError;
 import com.rethinkdb.net.Result;
+import manager.components.State;
 import manager.components.Task;
 
 import java.util.Collections;
@@ -56,6 +57,8 @@ public class RethinkDbAdapter implements DbConnection {
             var task = new Task((String)row_data.get("title"));
             task.setDescription((String)row_data.get("description"));
             task.setType((String)row_data.get("type"));
+//            TODO load state from db
+//            task.progressState = STATE;
             data.add(task);
         }
         return data;
@@ -69,6 +72,7 @@ public class RethinkDbAdapter implements DbConnection {
                         r.hashMap("title", taskToAdd.title)
                                 .with("description", taskToAdd.description)
                                 .with("type", taskToAdd.type)
+                                .with("state", taskToAdd.progressState)
                 ).run(conn);
             }catch (ReqlOpFailedError err){
                 // try to create table

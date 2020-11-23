@@ -2,7 +2,7 @@ package manager.components;
 
 public enum State{
     TODO(0),
-    IN_PROGRES(1),
+    IN_PROGRESS(1),
     REVIEW(2),
     DONE(3);
 

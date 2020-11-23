@@ -34,9 +34,10 @@ public class ManagerApp extends Application {
 
         List<Task> tasksData = dbConn.getTasks();
 
+        // TODO remove temporary states change
         for(int i = 0; i < tasksData.size(); ++i){
             if(i % 5 == 0) {
-                tasksData.get(i).progressState = State.IN_PROGRES;
+                tasksData.get(i).progressState = State.IN_PROGRESS;
             }
             else if(i%3 == 0){
                 tasksData.get(i).progressState = State.REVIEW;
