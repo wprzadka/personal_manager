@@ -1,8 +1,10 @@
 package manager;
 
 import javafx.application.Application;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import manager.components.State;
 import manager.components.task_visualize.BackgroundViewDecorator;
 import manager.components.task_visualize.BorderViewDecorator;
 import manager.components.task_visualize.ViewComponent;
@@ -18,9 +20,9 @@ import java.util.List;
 
 public class ManagerApp extends Application {
 
-    private DbConnection dbConn;
-    private UserInterface ui;
-    private List<ViewComponent> tasks;
+    private final DbConnection dbConn;
+    private final UserInterface ui;
+    private final List<ViewComponent> tasks;
     private final int width = 1200;
     private final int height = 900;
 
@@ -31,6 +33,17 @@ public class ManagerApp extends Application {
         dbConn = new RethinkDbAdapter();
 
         List<Task> tasksData = dbConn.getTasks();
+
+        // TODO remove temporary states change
+        for(int i = 0; i < tasksData.size(); ++i){
+            if(i % 5 == 0) {
+                tasksData.get(i).progressState = State.IN_PROGRESS;
+            }
+            else if(i%3 == 0){
+                tasksData.get(i).progressState = State.REVIEW;
+            }
+        }
+
         for(var data : tasksData){
             tasks.add(
                     new BorderViewDecorator(

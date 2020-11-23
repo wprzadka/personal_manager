@@ -3,12 +3,10 @@ package manager.components.task_visualize;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class BorderViewDecorator implements ViewComponent {
+public class BorderViewDecorator extends ViewComponent {
 
-    ViewComponent component;
-
-    public BorderViewDecorator(ViewComponent subComponent){
-        component = subComponent;
+    public BorderViewDecorator(ViewComponent component) {
+        super(component);
     }
 
     @Override

@@ -8,16 +8,17 @@ import javafx.scene.text.Text;
 import manager.components.task_visualize.ViewComponent;
 
 
-public class Task implements ViewComponent {
+public class Task extends ViewComponent {
 
     public String title;
     public String description;
     public String type;
-    private State progressState;
+    public State progressState;
 
     private SubTask subComponents;
 
     public Task(String title){
+        super(null);
         this.title = title;
         this.description = "";
         this.type = "";
@@ -25,6 +26,7 @@ public class Task implements ViewComponent {
     }
 
     public Task(){
+        super(null);
         this.title = "";
         this.description = "";
         this.type = "";
@@ -57,6 +59,11 @@ public class Task implements ViewComponent {
 
     public boolean needsReview(){
         return progressState.needsReview;
+    }
+
+    @Override
+    public Task getTask(){
+        return this;
     }
 
     @Override
