@@ -49,8 +49,8 @@ public class TableUserInterface implements UserInterface {
         HBox operationBar = new HBox();
 //        --module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml
         operationBar.getChildren().addAll(
-                createOperationBarButton("Add", 252),
-                createOperationBarButton("Sync", 552)
+                createOperationBarButton("Add", 262),
+                createOperationBarButton("Sync", 642)
         );
 //        operationBar.setPrefHeight(opBarHeight);
         operationBar.setAlignment(Pos.CENTER_RIGHT);
@@ -88,10 +88,10 @@ public class TableUserInterface implements UserInterface {
 
     private Button createOperationBarButton(String text, int colorRgbCode){
         var button = new Button(text);
+
         int endColorVal = Math.max(colorRgbCode - 222, 0);
         String endColor = String.format("%03d", endColorVal);
         String begColor = String.format("%03d", colorRgbCode);
-
 
         int onHoverEndColorVal = Math.min(colorRgbCode + 111, 999);
         String onHoverEndColor = String.format("%03d", onHoverEndColorVal);
