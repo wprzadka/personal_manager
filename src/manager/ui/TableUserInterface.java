@@ -81,6 +81,7 @@ public class TableUserInterface implements UserInterface {
         column.setStyle("-fx-border-style: solid;");
         column.setPrefWidth(width);
         column.setPadding(new Insets(8));
+        column.setSpacing(5);
         column.setAlignment(Pos.TOP_CENTER);
         return column;
     }
