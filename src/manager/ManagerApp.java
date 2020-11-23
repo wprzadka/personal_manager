@@ -5,10 +5,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import manager.components.State;
-import manager.components.task_visualize.BackgroundViewDecorator;
-import manager.components.task_visualize.BorderViewDecorator;
-import manager.components.task_visualize.ViewComponent;
-import manager.components.task_visualize.ViewComponentIterator;
+import manager.components.task_visualize.*;
 import manager.ui.UserInterface;
 import manager.ui.TableUserInterface;
 import manager.components.Task;
@@ -46,10 +43,11 @@ public class ManagerApp extends Application {
 
         for(var data : tasksData){
             tasks.add(
-                    new BorderViewDecorator(
-                        new BackgroundViewDecorator(
-                            data
-                    )));
+                    new DragViewDecorator(
+                        new BorderViewDecorator(
+                            new BackgroundViewDecorator(
+                                data
+                    ))));
         }
     }
 
