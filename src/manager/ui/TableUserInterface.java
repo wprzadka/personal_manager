@@ -92,7 +92,7 @@ public class TableUserInterface implements UserInterface {
         String endColor = String.format("%03d", endColorVal);
         String begColor = String.format("%03d", colorRgbCode);
 
-        int onHoverEndColorVal = Math.min(colorRgbCode + 111, 999);
+        int onHoverEndColorVal = Math.min(endColorVal + 111, 999);
         String onHoverEndColor = String.format("%03d", onHoverEndColorVal);
         int onHoverBegColorVal = Math.min(colorRgbCode + 111, 999);
         String onHoverBegColor = String.format("%03d", onHoverBegColorVal);
@@ -103,7 +103,7 @@ public class TableUserInterface implements UserInterface {
         );
         button.setOnMouseEntered(
                 event -> button.setStyle(
-                        "-fx-background-color: linear-gradient(#" + onHoverBegColor + ", #" + onHoverEndColor + ");"
+                        "-fx-background-color: linear-gradient(#" + onHoverEndColor + ", #" + onHoverBegColor + ");"
                         + "-fx-text-fill: #aaa;"
                 )
         );
