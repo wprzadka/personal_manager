@@ -13,7 +13,6 @@ import javafx.scene.Cursor;
 
 import manager.components.task_visualize.ViewComponentIterator;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class TableUserInterface implements UserInterface {
 
     private int width;
     private int height;
-    private List<Pane> columns;
+    private final List<Pane> columns;
 
     public TableUserInterface(int width, int height){
         this.width = width;
