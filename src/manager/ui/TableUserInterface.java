@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.Cursor;
 
 import manager.components.task_visualize.ViewComponentIterator;
 
@@ -31,9 +32,11 @@ public class TableUserInterface implements UserInterface {
     @Override
     public Scene getScene(){
 
+        int opBarHeight = 35;
+
         Pane columnsLayout = new HBox();
         columnsLayout.setPrefWidth(height);
-        columnsLayout.setMinHeight(height - 25);
+        columnsLayout.setMinHeight(height - opBarHeight);
         String[] colNames = new String[]{"ToDo", "InProgress", "Done"};
         for(var name : colNames){
             columns.add(createColumn(name));
@@ -42,11 +45,17 @@ public class TableUserInterface implements UserInterface {
 
 //        var synchronizeButton = new Button("Synchronize");
 
-        Pane operationBar = new HBox();
 
-        var add = new Text("Add Task");
-        operationBar.getChildren().add(add);
-        operationBar.setPrefHeight(25);
+        HBox operationBar = new HBox();
+//        --module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml
+        operationBar.getChildren().addAll(
+                createOperationBarButton("Add", 252),
+                createOperationBarButton("Sync", 552)
+        );
+//        operationBar.setPrefHeight(opBarHeight);
+        operationBar.setAlignment(Pos.CENTER_RIGHT);
+        operationBar.setPadding(new Insets(5, 10, 5, 10));
+        operationBar.setSpacing(10);
         operationBar.setBackground(
                 new Background(
                         new BackgroundFill(Color.DIMGRAY, CornerRadii.EMPTY, Insets.EMPTY)
@@ -75,6 +84,38 @@ public class TableUserInterface implements UserInterface {
         column.setPadding(new Insets(8));
         column.setAlignment(Pos.TOP_CENTER);
         return column;
+    }
+
+    private Button createOperationBarButton(String text, int colorRgbCode){
+        var button = new Button(text);
+        int endColorVal = Math.max(colorRgbCode - 222, 0);
+        String endColor = String.format("%03d", endColorVal);
+        String begColor = String.format("%03d", colorRgbCode);
+
+
+        int onHoverEndColorVal = Math.min(colorRgbCode + 111, 999);
+        String onHoverEndColor = String.format("%03d", onHoverEndColorVal);
+        int onHoverBegColorVal = Math.min(colorRgbCode + 111, 999);
+        String onHoverBegColor = String.format("%03d", onHoverBegColorVal);
+
+        button.setStyle(
+                "-fx-background-color: linear-gradient(#" + begColor + ", #" + endColor + ");"
+                + "-fx-text-fill: #aaa;"
+        );
+        button.setOnMouseEntered(
+                event -> button.setStyle(
+                        "-fx-background-color: linear-gradient(#" + onHoverBegColor + ", #" + onHoverEndColor + ");"
+                        + "-fx-text-fill: #aaa;"
+                )
+        );
+        button.setOnMouseExited(
+                event -> button.setStyle(
+                        "-fx-background-color: linear-gradient(#" + begColor + ", #" + endColor + ");"
+                                + "-fx-text-fill: #aaa;"
+                )
+        );
+        button.setCursor(Cursor.CLOSED_HAND);
+        return button;
     }
 
     public void displayTasks(ViewComponentIterator iter){
