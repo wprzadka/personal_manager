@@ -68,7 +68,7 @@ public class RethinkDbAdapter implements DbConnection {
                 r.db("Content").table("tasks").insert(
                         r.hashMap("title", taskToAdd.title)
                                 .with("description", taskToAdd.description)
-                                .with("content", taskToAdd.type)
+                                .with("type", taskToAdd.type)
                 ).run(conn);
             }catch (ReqlOpFailedError err){
                 // try to create table
