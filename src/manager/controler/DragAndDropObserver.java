@@ -7,7 +7,7 @@ public class DragAndDropObserver {
 
     private static final DragAndDropObserver instance = new DragAndDropObserver();
 
-    MainEventsController controller;
+    private MainEventsController controller;
 
     static public DragAndDropObserver getInstance(){
         return instance;

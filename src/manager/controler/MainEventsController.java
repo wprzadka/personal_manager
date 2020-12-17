@@ -25,11 +25,11 @@ public class MainEventsController {
                 destinationPosition[0] - sourcePosition[0],
                 destinationPosition[1] - sourcePosition[1]
         };
-        System.out.println(component.getTask().progressState);
+//        System.out.println(component.getTask().progressState);
         if(drag_vector[0] > 200){
             component.getTask().moveStateToNext();
         }
-        System.out.println(component.getTask().progressState);
+//        System.out.println(component.getTask().progressState);
         application.refresh();
     }
 

@@ -18,7 +18,7 @@ public class DragViewDecorator extends ViewComponent {
 
         pane.setOnDragDetected(
                 event -> {
-                    System.out.println("begin: " + event.getSceneX());
+//                    System.out.println("begin: " + event.getSceneX());
                     pane.setVisible(false);
                     observer.startDrag(this, new double[]{event.getSceneX(), event.getSceneY()});
                 }
@@ -26,7 +26,7 @@ public class DragViewDecorator extends ViewComponent {
 
         pane.setOnMouseReleased(
                 event -> {
-                    System.out.println("end: " + event.getSceneX());
+//                    System.out.println("end: " + event.getSceneX());
                     pane.setVisible(true);
                     observer.dragEndingPosition(new double[]{event.getSceneX(), event.getSceneY()});
                 }

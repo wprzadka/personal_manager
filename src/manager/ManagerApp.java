@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ManagerApp extends Application {
 
-    private final MainEventsController controller = MainEventsController.getInstance();;
+    private final MainEventsController controller = MainEventsController.getInstance();
     private final DbConnection dbConn;
     private final UserInterface ui;
     private final List<ViewComponent> tasks;
