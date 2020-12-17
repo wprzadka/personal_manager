@@ -53,6 +53,10 @@ public class Task extends ViewComponent {
         return progressState.changeStateIfAvailable(next);
     }
 
+    public void moveStateToNext(){
+        progressState = progressState.next(progressState);
+    }
+
     public void setNeedsReview(boolean isNeeded){
         progressState.setNeedsReview(isNeeded);
     }

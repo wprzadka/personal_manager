@@ -1,12 +1,15 @@
 package manager.components.task_visualize;
 
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import manager.controler.DragAndDropObserver;
 
 public class DragViewDecorator extends ViewComponent {
 
+    private DragAndDropObserver observer;
+
     public DragViewDecorator(ViewComponent component) {
         super(component);
+        observer = DragAndDropObserver.getInstance();
     }
 
     @Override
@@ -17,6 +20,7 @@ public class DragViewDecorator extends ViewComponent {
                 event -> {
                     System.out.println("begin: " + event.getSceneX());
                     pane.setVisible(false);
+                    observer.startDrag(this, new double[]{event.getSceneX(), event.getSceneY()});
                 }
         );
 
@@ -24,6 +28,7 @@ public class DragViewDecorator extends ViewComponent {
                 event -> {
                     System.out.println("end: " + event.getSceneX());
                     pane.setVisible(true);
+                    observer.dragEndingPosition(new double[]{event.getSceneX(), event.getSceneY()});
                 }
         );
 
