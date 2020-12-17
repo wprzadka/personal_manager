@@ -129,6 +129,10 @@ public class TableUserInterface implements UserInterface {
         while(iter.hasNext()){
             var component = iter.next();
             int columnNum = component.getTask().progressState.getStateLevel();
+            // TODO create especial column for unmatched states?
+            if (columnNum >= columns.size()){
+                columnNum = columns.size() - 1;
+            }
             if(columns.get(columnNum).getChildren().size() < 5) {
                 Pane view = component.draw();
                 columns.get(columnNum).getChildren().add(view);
