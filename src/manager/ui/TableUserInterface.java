@@ -120,7 +120,9 @@ public class TableUserInterface implements UserInterface {
 
     public void refreshTasks(ViewComponentIterator iter){
         for(var col : columns){
+            var name = col.getChildren().get(0);
             col.getChildren().clear();
+            col.getChildren().add(name);
         }
         displayTasks(iter);
     }
