@@ -81,6 +81,7 @@ public class TableUserInterface implements UserInterface {
         column.setStyle("-fx-border-style: solid;");
         column.setPrefWidth(width);
         column.setPadding(new Insets(8));
+        column.setSpacing(5);
         column.setAlignment(Pos.TOP_CENTER);
         return column;
     }
@@ -92,7 +93,7 @@ public class TableUserInterface implements UserInterface {
         String endColor = String.format("%03d", endColorVal);
         String begColor = String.format("%03d", colorRgbCode);
 
-        int onHoverEndColorVal = Math.min(colorRgbCode + 111, 999);
+        int onHoverEndColorVal = Math.min(endColorVal + 111, 999);
         String onHoverEndColor = String.format("%03d", onHoverEndColorVal);
         int onHoverBegColorVal = Math.min(colorRgbCode + 111, 999);
         String onHoverBegColor = String.format("%03d", onHoverBegColorVal);
@@ -103,7 +104,7 @@ public class TableUserInterface implements UserInterface {
         );
         button.setOnMouseEntered(
                 event -> button.setStyle(
-                        "-fx-background-color: linear-gradient(#" + onHoverBegColor + ", #" + onHoverEndColor + ");"
+                        "-fx-background-color: linear-gradient(#" + onHoverEndColor + ", #" + onHoverBegColor + ");"
                         + "-fx-text-fill: #aaa;"
                 )
         );
@@ -117,10 +118,23 @@ public class TableUserInterface implements UserInterface {
         return button;
     }
 
-    public void displayTasks(ViewComponentIterator iter){
+    public void refreshTasks(ViewComponentIterator iter){
+        for(var col : columns){
+            var name = col.getChildren().get(0);
+            col.getChildren().clear();
+            col.getChildren().add(name);
+        }
+        displayTasks(iter);
+    }
+
+    private void displayTasks(ViewComponentIterator iter){
         while(iter.hasNext()){
             var component = iter.next();
             int columnNum = component.getTask().progressState.getStateLevel();
+            // TODO create especial column for unmatched states?
+            if (columnNum >= columns.size()){
+                columnNum = columns.size() - 1;
+            }
             if(columns.get(columnNum).getChildren().size() < 5) {
                 Pane view = component.draw();
                 columns.get(columnNum).getChildren().add(view);

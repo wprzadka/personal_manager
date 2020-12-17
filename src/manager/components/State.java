@@ -28,4 +28,20 @@ public enum State{
     public int getStateLevel(){
         return progressLevel;
     }
+
+    public State next(State current){
+        switch (current){
+            case TODO:
+                return IN_PROGRESS;
+            case IN_PROGRESS:
+                if (current.needsReview){
+                    return REVIEW;
+                }
+                return DONE;
+            case REVIEW:
+                return DONE;
+            default:
+                return TODO;
+        }
+    }
 }
