@@ -38,8 +38,20 @@ public enum State{
                     return REVIEW;
                 }
                 return DONE;
-            case REVIEW:
+            default:
                 return DONE;
+        }
+    }
+
+    public State prev(State current){
+        switch (current){
+            case DONE:
+                if (current.needsReview){
+                    return REVIEW;
+                }
+                return IN_PROGRESS;
+            case REVIEW:
+                return IN_PROGRESS;
             default:
                 return TODO;
         }

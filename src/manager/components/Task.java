@@ -57,6 +57,10 @@ public class Task extends ViewComponent {
         progressState = progressState.next(progressState);
     }
 
+    public void moveStateToPrev(){
+        progressState = progressState.prev(progressState);
+    }
+
     public void setNeedsReview(boolean isNeeded){
         progressState.setNeedsReview(isNeeded);
     }
