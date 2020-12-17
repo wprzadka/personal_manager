@@ -135,10 +135,10 @@ public class TableUserInterface implements UserInterface {
             if (columnNum >= columns.size()){
                 columnNum = columns.size() - 1;
             }
-            if(columns.get(columnNum).getChildren().size() < 5) {
-                Pane view = component.draw();
-                columns.get(columnNum).getChildren().add(view);
-            }
+//            if(columns.get(columnNum).getChildren().size() < 9) {
+            Pane view = component.draw();
+            columns.get(columnNum).getChildren().add(view);
+//            }
         }
     }
 }
