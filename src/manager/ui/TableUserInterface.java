@@ -1,9 +1,11 @@
 package manager.ui;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -12,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.Cursor;
 
 import manager.components.task_visualize.ViewComponentIterator;
+import manager.controller.MainEventsController;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,9 +51,13 @@ public class TableUserInterface implements UserInterface {
         HBox operationBar = new HBox();
 //        --module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml
         operationBar.getChildren().addAll(
-                createOperationBarButton("Add", 262),
-                createOperationBarButton("Sync", 642)
+                createOperationBarButton("Add", 262,
+                        mouseEvent -> MainEventsController.getInstance().addNewComponent()
+                ),
+                createOperationBarButton("Sync", 642, null)
         );
+
+
 //        operationBar.setPrefHeight(opBarHeight);
         operationBar.setAlignment(Pos.CENTER_RIGHT);
         operationBar.setPadding(new Insets(5, 10, 5, 10));
@@ -86,7 +93,7 @@ public class TableUserInterface implements UserInterface {
         return column;
     }
 
-    private Button createOperationBarButton(String text, int colorRgbCode){
+    private Button createOperationBarButton(String text, int colorRgbCode, EventHandler<MouseEvent> onClickHandler){
         var button = new Button(text);
 
         int endColorVal = Math.max(colorRgbCode - 222, 0);
@@ -114,6 +121,7 @@ public class TableUserInterface implements UserInterface {
                                 + "-fx-text-fill: #aaa;"
                 )
         );
+        button.setOnMouseClicked(onClickHandler);
         button.setCursor(Cursor.CLOSED_HAND);
         return button;
     }

@@ -1,7 +1,7 @@
 package manager.components.task_visualize;
 
 import javafx.scene.layout.Pane;
-import manager.controler.DragAndDropObserver;
+import manager.controller.DragAndDropObserver;
 
 public class DragViewDecorator extends ViewComponent {
 

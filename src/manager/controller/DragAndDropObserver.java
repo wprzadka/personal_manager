@@ -1,8 +1,9 @@
-package manager.controler;
+package manager.controller;
 
 import manager.components.task_visualize.ViewComponent;
 
 // Design Pattern: Observer
+// Design Pattern: Singleton
 public class DragAndDropObserver {
 
     private static final DragAndDropObserver instance = new DragAndDropObserver();
