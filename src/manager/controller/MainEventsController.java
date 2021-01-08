@@ -1,9 +1,7 @@
 package manager.controller;
 
 
-import javafx.scene.layout.Pane;
 import manager.ManagerApp;
-import manager.components.Task;
 import manager.components.task_visualize.BackgroundViewDecorator;
 import manager.components.task_visualize.BorderViewDecorator;
 import manager.components.task_visualize.DragViewDecorator;
@@ -56,13 +54,19 @@ public class MainEventsController {
     }
 
     public void addNewComponent(){
-        componentsList.add(
-                new DragViewDecorator(
-                        new BorderViewDecorator(
-                                new BackgroundViewDecorator(
-                                        new Task("add from event controller")
-                                ))));
-        application.refresh();
+        if(!isInitialized){
+            throw new RuntimeException("MainEventsController is not initialized");
+        }
+        ViewComponent createdComponent = EditComponentBox.CreateViewComponent();
+        if(createdComponent != null) {
+            componentsList.add(
+                    new DragViewDecorator(
+                            new BorderViewDecorator(
+                                    new BackgroundViewDecorator(
+                                            createdComponent
+            ))));
+            application.refresh();
+        }
     }
 
 }

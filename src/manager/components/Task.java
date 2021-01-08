@@ -17,6 +17,14 @@ public class Task extends ViewComponent {
 
     private SubTask subComponents;
 
+    public Task(String title, String description, String type, State state){
+        super(null);
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.progressState = state;
+    }
+
     public Task(String title){
         super(null);
         this.title = title;
