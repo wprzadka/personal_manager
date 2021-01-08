@@ -1,11 +1,11 @@
 package manager.ui;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -93,7 +93,7 @@ public class TableUserInterface implements UserInterface {
         return column;
     }
 
-    private Button createOperationBarButton(String text, int colorRgbCode, EventHandler<MouseEvent> onClickHandler){
+    private Button createOperationBarButton(String text, int colorRgbCode, EventHandler<ActionEvent> onClickHandler){
         var button = new Button(text);
 
         int endColorVal = Math.max(colorRgbCode - 222, 0);
@@ -121,7 +121,7 @@ public class TableUserInterface implements UserInterface {
                                 + "-fx-text-fill: #aaa;"
                 )
         );
-        button.setOnMouseClicked(onClickHandler);
+        button.setOnAction(onClickHandler);
         button.setCursor(Cursor.CLOSED_HAND);
         return button;
     }
