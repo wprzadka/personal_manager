@@ -16,19 +16,16 @@ public class ViewComponentIterator implements Iterator{
     // Design Pattern Strategy
     public ViewComponentIterator(List<ViewComponent> container, TaskFilter componentsFilter){
         innerIterator = container.listIterator();
-        filter = componentsFilter;
-    }
-
-    public ViewComponentIterator(List<ViewComponent> container){
-        innerIterator = container.listIterator();
-        filter = null;
+        if(componentsFilter == null) {
+            filter = new AcceptAllFilter();
+        }
     }
 
     public boolean hasNext(){
-        if(filter == null){
-            return innerIterator.hasNext();
-        }
         if(nextComponent == null){
+            if(!innerIterator.hasNext()){
+                return false;
+            }
             ViewComponent next = innerIterator.next();
             while (innerIterator.hasNext() && !filter.satisfiesPredicate(next.getTask())) {
                 next = innerIterator.next();
@@ -39,9 +36,6 @@ public class ViewComponentIterator implements Iterator{
     }
 
     public ViewComponent next(){
-        if(filter == null){
-            return innerIterator.next();
-        }
         if(nextComponent == null) {
             ViewComponent next = innerIterator.next();
             while (innerIterator.hasNext() && !filter.satisfiesPredicate(next.getTask())) {
