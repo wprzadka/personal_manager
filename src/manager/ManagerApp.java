@@ -3,6 +3,8 @@ package manager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import manager.components.iteration.TaskFilter;
+import manager.components.iteration.ViewComponentIterator;
 import manager.components.task_visualize.*;
 import manager.ui.UserInterface;
 import manager.ui.TableUserInterface;
@@ -20,6 +22,7 @@ public class ManagerApp extends Application {
     private final DbConnection dbConn;
     private final UserInterface ui;
     private final List<ViewComponent> components;
+    private TaskFilter filter;
     private final int width = 1200;
     private final int height = 900;
 
@@ -42,8 +45,12 @@ public class ManagerApp extends Application {
         }
     }
 
+    public void setFilter(TaskFilter filter){
+        this.filter = filter;
+    }
+
     public void refresh(){
-        ui.refreshTasks(new ViewComponentIterator(components));
+        ui.refreshTasks(new ViewComponentIterator(components, filter));
     }
 
     @Override
@@ -51,7 +58,7 @@ public class ManagerApp extends Application {
 
         stage.setTitle("Task Manager");
         stage.setScene(ui.getScene());
-        ui.refreshTasks(new ViewComponentIterator(components));
+        refresh();
         stage.show();
     }
 

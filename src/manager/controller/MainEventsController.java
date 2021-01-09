@@ -3,6 +3,7 @@ package manager.controller;
 
 import manager.ManagerApp;
 import manager.components.Task;
+import manager.components.iteration.TaskFilter;
 import manager.components.task_visualize.*;
 import manager.database.DbConnection;
 
@@ -12,12 +13,15 @@ import java.util.List;
 public class MainEventsController {
 
     private static final MainEventsController instance = new MainEventsController();
+    private FilterSettingsBox filterSettings;
     private ManagerApp application;
     private DbConnection dbConnection;
     private List<ViewComponent> componentsList;
     private boolean isInitialized = false;
 
-    private MainEventsController(){}
+    private MainEventsController(){
+        filterSettings = new FilterSettingsBox();
+    }
 
     public static MainEventsController getInstance(){
         return instance;
@@ -67,6 +71,17 @@ public class MainEventsController {
             throw new RuntimeException("MainEventsController is not initialized");
         }
         if(EditComponentBox.editTask(task)) {
+            application.refresh();
+        }
+    }
+
+    public void editFilterSettings(){
+        if(!isInitialized){
+            throw new RuntimeException("MainEventsController is not initialized");
+        }
+        TaskFilter filter = filterSettings.getNewFilter();
+        if(filter != null) {
+            application.setFilter(filter);
             application.refresh();
         }
     }

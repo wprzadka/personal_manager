@@ -13,7 +13,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.Cursor;
 
-import manager.components.task_visualize.ViewComponentIterator;
+import manager.components.iteration.ViewComponentIterator;
 import manager.controller.MainEventsController;
 
 import java.util.LinkedList;
@@ -54,7 +54,10 @@ public class TableUserInterface implements UserInterface {
                 createOperationBarButton("Add", 262,
                         mouseEvent -> MainEventsController.getInstance().addNewComponent()
                 ),
-                createOperationBarButton("Sync", 642, null)
+                createOperationBarButton("Sync", 642, null),
+                createOperationBarButton("Filter", 333,
+                        mouseEvent -> MainEventsController.getInstance().editFilterSettings()
+                )
         );
 
 
