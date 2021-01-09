@@ -31,7 +31,6 @@ public class DragViewDecorator extends ViewComponent {
                     observer.dragEndingPosition(new double[]{event.getSceneX(), event.getSceneY()});
                 }
         );
-
         return pane;
     }
 }

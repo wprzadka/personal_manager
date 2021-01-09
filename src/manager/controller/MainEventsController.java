@@ -2,10 +2,8 @@ package manager.controller;
 
 
 import manager.ManagerApp;
-import manager.components.task_visualize.BackgroundViewDecorator;
-import manager.components.task_visualize.BorderViewDecorator;
-import manager.components.task_visualize.DragViewDecorator;
-import manager.components.task_visualize.ViewComponent;
+import manager.components.Task;
+import manager.components.task_visualize.*;
 import manager.database.DbConnection;
 
 import java.util.List;
@@ -59,14 +57,14 @@ public class MainEventsController {
         }
         ViewComponent createdComponent = EditComponentBox.CreateViewComponent();
         if(createdComponent != null) {
-            componentsList.add(
-                    new DragViewDecorator(
-                            new BorderViewDecorator(
-                                    new BackgroundViewDecorator(
-                                            createdComponent
-            ))));
+            componentsList.add(createdComponent);
             application.refresh();
         }
     }
 
+    public void editTask(Task task){
+        if(EditComponentBox.editTask(task)) {
+            application.refresh();
+        }
+    }
 }
