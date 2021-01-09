@@ -7,16 +7,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import manager.components.iteration.ConcatenatePredicatesFilter;
 import manager.components.iteration.TaskFilter;
+import manager.components.iteration.TaskRegexFilter;
 import manager.components.iteration.TaskTypeFilter;
 
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FilterSettingsBox {
 
-    String typeFieldContent;
+    String typeFieldContent = "";
+    String regexFieldContent = "";
 
     public TaskFilter getNewFilter(){
 
@@ -30,11 +34,10 @@ public class FilterSettingsBox {
         layout.setVgap(20);
         layout.setPadding(new Insets(20, 20, 0, 0));
 
-        var titleLabel = new Label("regex filter:");
-        var titleField = new TextField("-");
-        titleField.setDisable(true);
-        layout.add(titleLabel, 1, 0);
-        layout.add(titleField, 2, 0, 2, 1);
+        var regexLabel = new Label("regex filter:");
+        var regexField = new TextField(regexFieldContent);
+        layout.add(regexLabel, 1, 0);
+        layout.add(regexField, 2, 0, 2, 1);
 
         var typeLabel = new Label("type filter:");
         var typeField = new TextField(typeFieldContent);
@@ -61,15 +64,23 @@ public class FilterSettingsBox {
 
         window.showAndWait();
 
-        saveFieldsContent(typeField.getText());
+        saveFieldsContent(typeField.getText(), regexField.getText());
         if(isAccepted.get()){
-            return new TaskTypeFilter(Collections.singleton(typeField.getText()));
+            var filters = new LinkedList<TaskFilter>();
+            if(regexField.getText().length() > 0){
+                filters.add(new TaskRegexFilter(regexField.getText()));
+            }
+            if(typeField.getText().length() > 0){
+                filters.add(new TaskTypeFilter(Collections.singleton(typeField.getText())));
+            }
+            return new ConcatenatePredicatesFilter(filters);
         }else{
             return null;
         }
     }
 
-    private void saveFieldsContent(String typeFieldContent){
+    private void saveFieldsContent(String typeFieldContent, String regexFieldContent){
         this.typeFieldContent = typeFieldContent;
+        this.regexFieldContent = regexFieldContent;
     };
 }
