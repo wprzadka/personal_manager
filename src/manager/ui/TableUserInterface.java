@@ -54,7 +54,10 @@ public class TableUserInterface implements UserInterface {
                 createOperationBarButton("Add", 262,
                         mouseEvent -> MainEventsController.getInstance().addNewComponent()
                 ),
-                createOperationBarButton("Sync", 642, null)
+                createOperationBarButton("Sync", 642, null),
+                createOperationBarButton("Filter", 333,
+                        mouseEvent -> MainEventsController.getInstance().editFilterSettings()
+                )
         );
 
 

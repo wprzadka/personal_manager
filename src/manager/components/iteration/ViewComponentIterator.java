@@ -16,7 +16,8 @@ public class ViewComponentIterator implements Iterator{
     // Design Pattern Strategy
     public ViewComponentIterator(List<ViewComponent> container, TaskFilter componentsFilter){
         innerIterator = container.listIterator();
-        if(componentsFilter == null) {
+        filter = componentsFilter;
+        if(filter == null) {
             filter = new AcceptAllFilter();
         }
     }
