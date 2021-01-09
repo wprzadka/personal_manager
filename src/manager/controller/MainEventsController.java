@@ -63,6 +63,9 @@ public class MainEventsController {
     }
 
     public void editTask(Task task){
+        if(!isInitialized){
+            throw new RuntimeException("MainEventsController is not initialized");
+        }
         if(EditComponentBox.editTask(task)) {
             application.refresh();
         }
