@@ -13,7 +13,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.Cursor;
 
-import manager.components.task_visualize.ViewComponentIterator;
+import manager.components.iteration.ViewComponentIterator;
 import manager.controller.MainEventsController;
 
 import java.util.LinkedList;
