@@ -1,8 +1,9 @@
-package manager.controler;
+package manager.controller;
 
 import manager.components.task_visualize.ViewComponent;
 
 // Design Pattern: Observer
+// Design Pattern: Singleton
 public class DragAndDropObserver {
 
     private static final DragAndDropObserver instance = new DragAndDropObserver();
@@ -27,7 +28,9 @@ public class DragAndDropObserver {
 
     public void dragEndingPosition(double[] position){
 //        float[] drag_vector = new float[]{position[0] - dragged_from[0], position[1] - dragged_from[1]};
-        controller.moveComponent(currentDragged, dragged_from, position);
-        currentDragged = null;
+        if(currentDragged != null) {
+            controller.moveComponent(currentDragged, dragged_from, position);
+            currentDragged = null;
+        }
     }
 }

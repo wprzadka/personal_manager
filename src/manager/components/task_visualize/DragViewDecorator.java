@@ -1,7 +1,7 @@
 package manager.components.task_visualize;
 
 import javafx.scene.layout.Pane;
-import manager.controler.DragAndDropObserver;
+import manager.controller.DragAndDropObserver;
 
 public class DragViewDecorator extends ViewComponent {
 
@@ -31,7 +31,6 @@ public class DragViewDecorator extends ViewComponent {
                     observer.dragEndingPosition(new double[]{event.getSceneX(), event.getSceneY()});
                 }
         );
-
         return pane;
     }
 }
