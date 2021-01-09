@@ -126,13 +126,12 @@ public class EditComponentBox {
 
         window.showAndWait();
         if(isAccepted.get()){
-            // TODO add DragAndDropViewDecorator
-            return new EditorViewDecorator(new BackgroundViewDecorator(new BorderViewDecorator(new Task(
+            return new EditorViewDecorator(new DragViewDecorator(new BackgroundViewDecorator(new BorderViewDecorator(new Task(
                     titleField.getText(),
                     descriptionField.getText(),
                     typeField.getText(),
                     stateList.getValue()
-            ))));
+            )))));
         }else{
             return null;
         }

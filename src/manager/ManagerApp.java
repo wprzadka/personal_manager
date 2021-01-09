@@ -33,11 +33,12 @@ public class ManagerApp extends Application {
 
         for(var data : tasksData){
             components.add(
-                    new DragViewDecorator(
-                        new BorderViewDecorator(
-                            new BackgroundViewDecorator(
-                                data
-                    ))));
+                    new EditorViewDecorator(
+                        new DragViewDecorator(
+                            new BorderViewDecorator(
+                                new BackgroundViewDecorator(
+                                    data
+                    )))));
         }
     }
 
