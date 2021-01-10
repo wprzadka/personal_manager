@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.Cursor;
 
 import manager.components.iteration.ViewComponentIterator;
-import manager.controller.MainEventsController;
+import manager.configuration.Configuration;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -52,11 +52,11 @@ public class TableUserInterface implements UserInterface {
 //        --module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml
         operationBar.getChildren().addAll(
                 createOperationBarButton("Add", 262,
-                        mouseEvent -> MainEventsController.getInstance().addNewComponent()
+                        mouseEvent -> Configuration.getInstance().getMainEventsController().addNewComponent()
                 ),
                 createOperationBarButton("Sync", 642, null),
                 createOperationBarButton("Filter", 333,
-                        mouseEvent -> MainEventsController.getInstance().editFilterSettings()
+                        mouseEvent -> Configuration.getInstance().getMainEventsController().editFilterSettings()
                 )
         );
 

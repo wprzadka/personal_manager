@@ -1,7 +1,7 @@
 package manager.components.task_visualize;
 
 import javafx.scene.layout.Pane;
-import manager.controller.MainEventsController;
+import manager.configuration.Configuration;
 
 public class EditorViewDecorator extends ViewComponent {
 
@@ -15,7 +15,9 @@ public class EditorViewDecorator extends ViewComponent {
 
         Pane pane = component.draw();
 
-        pane.setOnMouseClicked(e -> MainEventsController.getInstance().editTask(component.getTask()));
+        pane.setOnMouseClicked(
+                e -> Configuration.getInstance().getMainEventsController().editTask(component.getTask())
+        );
 
         return pane;
     }
