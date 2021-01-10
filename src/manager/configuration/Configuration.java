@@ -3,6 +3,7 @@ package manager.configuration;
 import manager.components.ContentContainer;
 import manager.components.TaskIdentitySupervisor;
 import manager.controller.MainEventsController;
+import manager.database.ConcurrencyProxyDbConnection;
 import manager.database.DbConnection;
 import manager.database.RethinkDbAdapter;
 import manager.ui.TableUserInterface;
@@ -23,7 +24,7 @@ public class Configuration {
     private ContentContainer contentContainer;
 
     private Configuration(){
-        dbConnection = new RethinkDbAdapter();
+        dbConnection = new ConcurrencyProxyDbConnection(new RethinkDbAdapter());
         userInterface = new TableUserInterface(windowWidth, windowHeight);
         contentContainer = new ContentContainer();
         mainEventsController = new MainEventsController(
