@@ -17,6 +17,7 @@ public class MainEventsController {
     private final UserInterface userInterface;
     private final List<ViewComponent> componentsList;
     private TaskFilter filter;
+    private int dragSensitivity = 100;
 
     public MainEventsController(
             DbConnection dbConn,
@@ -34,14 +35,12 @@ public class MainEventsController {
                 destinationPosition[0] - sourcePosition[0],
                 destinationPosition[1] - sourcePosition[1]
         };
-//        System.out.println(component.getTask().progressState);
-        if(drag_vector[0] > 100){
+        if(drag_vector[0] > dragSensitivity){
             component.getTask().moveStateToNext();
-        }else if(drag_vector[0] < -100){
+        }else if(drag_vector[0] < -dragSensitivity){
             component.getTask().moveStateToPrev();
         }
         dbConnection.updateTask(component.getTask());
-//        System.out.println(component.getTask().progressState);
         refresh();
     }
 
