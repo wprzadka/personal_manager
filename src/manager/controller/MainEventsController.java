@@ -49,6 +49,7 @@ public class MainEventsController {
         ViewComponent createdComponent = EditComponentBox.CreateViewComponent();
         if(createdComponent != null) {
             componentsList.add(createdComponent);
+            dbConnection.addTask(createdComponent.getTask());
             refresh();
         }
     }

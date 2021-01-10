@@ -53,14 +53,16 @@ public class RethinkDbAdapter implements DbConnection {
 
         List<Task> data = new LinkedList<>();
         for(var row : rows){
-            Map row_data = (Map) row;
-            var task = new Task((String)row_data.get("title"));
-            task.setDescription((String)row_data.get("description"));
-            task.setType((String)row_data.get("type"));
-//            TODO load state from db
-//            task.progressState = STATE;
+            Map<String, Object> row_data = (Map) row;
+            var task = new Task(
+                    (String)row_data.get("title"),
+                    (String)row_data.get("description"),
+                    (String)row_data.get("type"),
+                    State.valueOf((String)row_data.get("state"))
+            );
             data.add(task);
         }
+        rows.close();
         return data;
     }
 

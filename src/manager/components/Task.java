@@ -33,14 +33,6 @@ public class Task extends ViewComponent {
         this.progressState = State.TODO;
     }
 
-    public Task(){
-        super(null);
-        this.title = "";
-        this.description = "";
-        this.type = "";
-        this.progressState = State.TODO;
-    }
-
     public TaskIterator iterator(){
         return new TaskIterator(subComponents);
     }
