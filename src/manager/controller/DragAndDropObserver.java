@@ -1,6 +1,7 @@
 package manager.controller;
 
 import manager.components.task_visualize.ViewComponent;
+import manager.configuration.Configuration;
 
 // Design Pattern: Observer
 // Design Pattern: Singleton
@@ -18,7 +19,7 @@ public class DragAndDropObserver {
     double[] dragged_from = new double[0];
 
     private DragAndDropObserver(){
-        controller = MainEventsController.getInstance();
+        controller = Configuration.getInstance().getMainEventsController();
     }
 
     public void startDrag(ViewComponent dragged, double[] position){

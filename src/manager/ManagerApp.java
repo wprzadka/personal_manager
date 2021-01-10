@@ -3,37 +3,24 @@ package manager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import manager.components.iteration.TaskFilter;
-import manager.components.iteration.ViewComponentIterator;
 import manager.components.task_visualize.*;
+import manager.configuration.Configuration;
 import manager.ui.UserInterface;
-import manager.ui.TableUserInterface;
 import manager.components.Task;
 import manager.database.DbConnection;
-import manager.database.RethinkDbAdapter;
 import manager.controller.MainEventsController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerApp extends Application {
 
-    private final MainEventsController controller = MainEventsController.getInstance();
-    private final DbConnection dbConn;
-    private final UserInterface ui;
-    private final List<ViewComponent> components;
-    private TaskFilter filter;
-    private final int width = 1200;
-    private final int height = 900;
+    private final DbConnection dbConn = Configuration.getInstance().getDbConnection();
+    private final UserInterface ui = Configuration.getInstance().getUserInterface();
+    private final MainEventsController eventController = Configuration.getInstance().getMainEventsController();
 
     public ManagerApp(){
-        ui = new TableUserInterface(width, height);
-        components = new ArrayList<>();
-        dbConn = new RethinkDbAdapter();
-        controller.initialize(this, dbConn, components);
-
         List<Task> tasksData = dbConn.getTasks();
-
+        List<ViewComponent> components = Configuration.getInstance().getComponentsList();
         for(var data : tasksData){
             components.add(
                     new EditorViewDecorator(
@@ -45,20 +32,12 @@ public class ManagerApp extends Application {
         }
     }
 
-    public void setFilter(TaskFilter filter){
-        this.filter = filter;
-    }
-
-    public void refresh(){
-        ui.refreshTasks(new ViewComponentIterator(components, filter));
-    }
-
     @Override
     public void start(Stage stage) {
 
         stage.setTitle("Task Manager");
         stage.setScene(ui.getScene());
-        refresh();
+        eventController.refresh();
         stage.show();
     }
 
