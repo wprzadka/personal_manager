@@ -15,22 +15,29 @@ public class Task extends ViewComponent {
     public String type;
     public State progressState;
 
+    private long identity;
     private SubTask subComponents;
 
-    public Task(String title, String description, String type, State state){
+    public Task(long identity, String title, String description, String type, State state){
         super(null);
+        this.identity = identity;
         this.title = title;
         this.description = description;
         this.type = type;
         this.progressState = state;
     }
 
-    public Task(String title){
+    public Task(long identity, String title){
         super(null);
+        this.identity = identity;
         this.title = title;
         this.description = "";
         this.type = "";
         this.progressState = State.TODO;
+    }
+
+    public long getIdentity() {
+        return identity;
     }
 
     public TaskIterator iterator(){
