@@ -40,6 +40,7 @@ public class MainEventsController {
         }else if(drag_vector[0] < -100){
             component.getTask().moveStateToPrev();
         }
+        dbConnection.updateTask(component.getTask());
 //        System.out.println(component.getTask().progressState);
         refresh();
     }
@@ -57,6 +58,7 @@ public class MainEventsController {
     public void editTask(Task task){
 
         if(EditComponentBox.editTask(task)) {
+            dbConnection.updateTask(task);
             refresh();
         }
     }

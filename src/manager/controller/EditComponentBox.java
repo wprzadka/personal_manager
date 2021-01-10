@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import manager.components.State;
 import manager.components.Task;
 import manager.components.task_visualize.*;
+import manager.configuration.Configuration;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -127,6 +128,7 @@ public class EditComponentBox {
         window.showAndWait();
         if(isAccepted.get()){
             return new EditorViewDecorator(new DragViewDecorator(new BackgroundViewDecorator(new BorderViewDecorator(new Task(
+                    Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
                     titleField.getText(),
                     descriptionField.getText(),
                     typeField.getText(),

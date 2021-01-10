@@ -54,7 +54,9 @@ public class RethinkDbAdapter implements DbConnection {
         List<Task> data = new LinkedList<>();
         for(var row : rows){
             Map<String, Object> row_data = (Map) row;
+
             var task = new Task(
+                    (Long)row_data.get("id"),
                     (String)row_data.get("title"),
                     (String)row_data.get("description"),
                     (String)row_data.get("type"),
@@ -75,8 +77,28 @@ public class RethinkDbAdapter implements DbConnection {
                                 .with("description", taskToAdd.description)
                                 .with("type", taskToAdd.type)
                                 .with("state", taskToAdd.progressState)
+                                .with("id", taskToAdd.getIdentity())
                 ).run(conn);
             }catch (ReqlOpFailedError err){
+                // try to create table
+                err.printStackTrace();
+            } catch (ReqlQueryLogicError err) {
+                err.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void updateTask(Task taskToUpdate){
+        if(conn != null) {
+            try {
+                r.db("Content").table("tasks").get(taskToUpdate.getIdentity()).update(
+                        r.hashMap("title", taskToUpdate.title)
+                                .with("description", taskToUpdate.description)
+                                .with("type", taskToUpdate.type)
+                                .with("state", taskToUpdate.progressState)
+                ).run(conn);
+            } catch (ReqlOpFailedError err) {
                 // try to create table
                 err.printStackTrace();
             } catch (ReqlQueryLogicError err) {

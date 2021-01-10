@@ -1,14 +1,12 @@
 package manager.configuration;
 
-import manager.components.task_visualize.ViewComponent;
+import manager.components.ContentContainer;
+import manager.components.TaskIdentitySupervisor;
 import manager.controller.MainEventsController;
 import manager.database.DbConnection;
 import manager.database.RethinkDbAdapter;
 import manager.ui.TableUserInterface;
 import manager.ui.UserInterface;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // Design Pattern Dependency injection
 // Design Pattern Singleton
@@ -18,16 +16,22 @@ public class Configuration {
     private DbConnection dbConnection;
     private MainEventsController mainEventsController;
     private UserInterface userInterface;
+    private TaskIdentitySupervisor taskIdentitySupervisor;
 
     private int windowWidth = 1200;
     private int windowHeight = 900;
-    private List<ViewComponent> componentsList;
+    private ContentContainer contentContainer;
 
     private Configuration(){
         dbConnection = new RethinkDbAdapter();
         userInterface = new TableUserInterface(windowWidth, windowHeight);
-        componentsList = new ArrayList<ViewComponent>();
-        mainEventsController = new MainEventsController(dbConnection, userInterface, componentsList);
+        contentContainer = new ContentContainer();
+        mainEventsController = new MainEventsController(
+                dbConnection,
+                userInterface,
+                contentContainer.getViewComponents()
+        );
+        taskIdentitySupervisor = new TaskIdentitySupervisor(contentContainer.getViewComponents());
     }
 
     public static Configuration getInstance(){
@@ -42,11 +46,15 @@ public class Configuration {
         return userInterface;
     }
 
-    public List<ViewComponent> getComponentsList() {
-        return componentsList;
+    public ContentContainer getContentContainer() {
+        return contentContainer;
     }
 
     public MainEventsController getMainEventsController() {
         return mainEventsController;
+    }
+
+    public TaskIdentitySupervisor getTaskIdentitySupervisor() {
+        return taskIdentitySupervisor;
     }
 }
