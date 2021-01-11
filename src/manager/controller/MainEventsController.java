@@ -13,6 +13,8 @@ import java.util.List;
 public class MainEventsController {
 
     private final FilterSettingsBox filterSettings = new FilterSettingsBox();
+    private final EditComponentBox editComponentBox = new EditComponentBox();
+
     private final DbConnection dbConnection;
     private final UserInterface userInterface;
     private final List<ViewComponent> componentsList;
@@ -46,7 +48,7 @@ public class MainEventsController {
 
     public void addNewComponent(){
 
-        ViewComponent createdComponent = EditComponentBox.CreateViewComponent();
+        ViewComponent createdComponent = editComponentBox.createViewComponent();
         if(createdComponent != null) {
             componentsList.add(createdComponent);
             dbConnection.addTask(createdComponent.getTask());
@@ -56,7 +58,7 @@ public class MainEventsController {
 
     public void editTask(Task task){
 
-        if(EditComponentBox.editTask(task)) {
+        if(editComponentBox.editTask(task)) {
             dbConnection.updateTask(task);
             refresh();
         }

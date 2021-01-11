@@ -15,54 +15,32 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EditComponentBox {
 
-    public static boolean editTask(Task task){
-        AtomicBoolean isAccepted = new AtomicBoolean(false);
+    private TextField titleField;
+    private TextArea descriptionField;
+    private TextField typeField;
+    private ComboBox<State> stateList;
 
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Edit Component");
-        var layout = new GridPane();
-        layout.setHgap(10);
-        layout.setVgap(20);
-        layout.setPadding(new Insets(20, 20, 0, 0));
+    private AtomicBoolean isAccepted;
+    private Stage window;
 
-        var titleLabel = new Label("title:");
-        var titleField = new TextField(task.title);
-        layout.add(titleLabel, 1, 0);
-        layout.add(titleField, 2, 0, 2, 1);
+    public EditComponentBox(){
+        titleField = new TextField();
+        descriptionField = new TextArea();
+        typeField = new TextField();
 
-        var descriptionLabel = new Label("description:");
-        var descriptionField = new TextArea(task.description);
-        layout.add(descriptionLabel, 1, 1);
-        layout.add(descriptionField, 2, 1, 2, 1);
-
-        var typeLabel = new Label("type:");
-        var typeField = new TextField(task.type);
-        layout.add(typeLabel, 1, 2);
-        layout.add(typeField, 2, 2, 2, 1);
-
-        var stateList = new ComboBox<State>();
+        stateList = new ComboBox<State>();
         stateList.getItems().addAll(State.values());
+
+        isAccepted = new AtomicBoolean();
+        window = createWindow();
+    }
+
+    public boolean editTask(Task task){
+
+        titleField.setText(task.title);
+        descriptionField.setText(task.description);
+        typeField.setText(task.type);
         stateList.setValue(task.progressState);
-        layout.add(stateList, 1, 3);
-
-        var cancelButton = new Button("cancel");
-        cancelButton.setOnAction(
-                e -> window.close()
-        );
-        layout.add(cancelButton, 1, 5);
-
-        var acceptButton = new Button("accept");
-        acceptButton.setOnAction(
-                e -> {
-                    isAccepted.set(true);
-                    window.close();
-                }
-        );
-        layout.add(acceptButton, 2, 5);
-
-        var scene = new Scene(layout, 380, 600);
-        window.setScene(scene);
 
         window.showAndWait();
         if(isAccepted.get()){
@@ -71,14 +49,36 @@ public class EditComponentBox {
             task.setType(typeField.getText());
             task.progressState = stateList.getValue();
         }
+        clearFields();
         return isAccepted.get();
     }
 
-    //Design Pattern Builder
-    public static ViewComponent CreateViewComponent(){
+    public ViewComponent createViewComponent(){
 
-        AtomicBoolean isAccepted = new AtomicBoolean(false);
+        window.showAndWait();
+        if(isAccepted.get()){
+            ViewComponent result = new EditorViewDecorator(new DragViewDecorator(new BackgroundViewDecorator(new BorderViewDecorator(new Task(
+                    Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
+                    titleField.getText(),
+                    descriptionField.getText(),
+                    typeField.getText(),
+                    stateList.getValue()
+            )))));
+            clearFields();
+            return result;
+        }else{
+            return null;
+        }
+    }
 
+    private void clearFields(){
+        titleField.clear();
+        descriptionField.clear();
+        typeField.clear();
+        stateList.setValue(State.DONE);
+    }
+
+    private Stage createWindow(){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Edit Component");
@@ -88,28 +88,26 @@ public class EditComponentBox {
         layout.setPadding(new Insets(20, 20, 0, 0));
 
         var titleLabel = new Label("title:");
-        var titleField = new TextField();
         layout.add(titleLabel, 1, 0);
         layout.add(titleField, 2, 0, 2, 1);
 
         var descriptionLabel = new Label("description:");
-        var descriptionField = new TextArea();
         layout.add(descriptionLabel, 1, 1);
         layout.add(descriptionField, 2, 1, 2, 1);
 
         var typeLabel = new Label("type:");
-        var typeField = new TextField();
         layout.add(typeLabel, 1, 2);
         layout.add(typeField, 2, 2, 2, 1);
 
-        var stateList = new ComboBox<State>();
-        stateList.getItems().addAll(State.values());
         stateList.setValue(State.TODO);
         layout.add(stateList, 1, 3);
 
         var cancelButton = new Button("cancel");
         cancelButton.setOnAction(
-                e -> window.close()
+                e -> {
+                    isAccepted.set(false);
+                    window.close();
+                }
         );
         layout.add(cancelButton, 1, 5);
 
@@ -124,18 +122,6 @@ public class EditComponentBox {
 
         var scene = new Scene(layout, 380, 600);
         window.setScene(scene);
-
-        window.showAndWait();
-        if(isAccepted.get()){
-            return new EditorViewDecorator(new DragViewDecorator(new BackgroundViewDecorator(new BorderViewDecorator(new Task(
-                    Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
-                    titleField.getText(),
-                    descriptionField.getText(),
-                    typeField.getText(),
-                    stateList.getValue()
-            )))));
-        }else{
-            return null;
-        }
+        return window;
     }
 }
