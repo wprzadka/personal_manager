@@ -14,14 +14,14 @@ import manager.ui.UserInterface;
 public class Configuration {
 
     private static final Configuration instance = new Configuration();
-    private DbConnection dbConnection;
-    private MainEventsController mainEventsController;
-    private UserInterface userInterface;
-    private TaskIdentitySupervisor taskIdentitySupervisor;
+    private final DbConnection dbConnection;
+    private final MainEventsController mainEventsController;
+    private final UserInterface userInterface;
+    private final TaskIdentitySupervisor taskIdentitySupervisor;
 
-    private int windowWidth = 1200;
-    private int windowHeight = 900;
-    private ContentContainer contentContainer;
+    private final int windowWidth = 1200;
+    private final int windowHeight = 900;
+    private final ContentContainer contentContainer;
 
     private Configuration(){
         dbConnection = new ConcurrencyProxyDbConnection(new RethinkDbAdapter());
