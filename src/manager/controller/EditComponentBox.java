@@ -17,13 +17,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EditComponentBox {
 
-    private TextField titleField;
-    private TextArea descriptionField;
-    private TextField typeField;
-    private ComboBox<State> stateList;
+    private final TextField titleField;
+    private final TextArea descriptionField;
+    private final TextField typeField;
+    private final ComboBox<State> stateList;
 
-    private AtomicBoolean isAccepted;
-    private Stage window;
+    private final AtomicBoolean isAccepted;
+    private final Stage window;
 
     public EditComponentBox(){
         titleField = new TextField();
