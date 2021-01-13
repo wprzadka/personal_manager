@@ -1,5 +1,7 @@
 package manager.configuration;
 
+import manager.actions.register.ActionsRegister;
+import manager.actions.register.ActionsStackRegister;
 import manager.components.ContentContainer;
 import manager.components.TaskIdentitySupervisor;
 import manager.controller.MainEventsController;
@@ -18,6 +20,7 @@ public class Configuration {
     private final MainEventsController mainEventsController;
     private final UserInterface userInterface;
     private final TaskIdentitySupervisor taskIdentitySupervisor;
+    private final ActionsRegister actionsRegister;
 
     private final int windowWidth = 1200;
     private final int windowHeight = 900;
@@ -27,10 +30,11 @@ public class Configuration {
         dbConnection = new ConcurrencyProxyDbConnection(new RethinkDbAdapter());
         userInterface = new TableUserInterface(windowWidth, windowHeight);
         contentContainer = new ContentContainer();
+        actionsRegister = new ActionsStackRegister();
         mainEventsController = new MainEventsController(
-                dbConnection,
                 userInterface,
-                contentContainer.getViewComponents()
+                contentContainer.getViewComponents(),
+                actionsRegister
         );
         taskIdentitySupervisor = new TaskIdentitySupervisor(contentContainer.getViewComponents());
     }
@@ -57,5 +61,9 @@ public class Configuration {
 
     public TaskIdentitySupervisor getTaskIdentitySupervisor() {
         return taskIdentitySupervisor;
+    }
+
+    public ActionsRegister getActionsHistory() {
+        return actionsRegister;
     }
 }

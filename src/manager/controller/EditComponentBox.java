@@ -53,17 +53,17 @@ public class EditComponentBox {
         return isAccepted.get();
     }
 
-    public ViewComponent createViewComponent(){
+    public Task createTask(){
 
         window.showAndWait();
         if(isAccepted.get()){
-            ViewComponent result = new EditorViewDecorator(new DragViewDecorator(new BackgroundViewDecorator(new BorderViewDecorator(new Task(
+            Task result = new Task(
                     Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
                     titleField.getText(),
                     descriptionField.getText(),
                     typeField.getText(),
                     stateList.getValue()
-            )))));
+            );
             clearFields();
             return result;
         }else{
