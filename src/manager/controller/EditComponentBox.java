@@ -6,9 +6,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import manager.actions.Action;
+import manager.actions.AddTaskAction;
+import manager.actions.EditTaskAction;
 import manager.components.State;
 import manager.components.Task;
-import manager.components.task_visualize.*;
 import manager.configuration.Configuration;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -35,7 +37,7 @@ public class EditComponentBox {
         window = createWindow();
     }
 
-    public boolean editTask(Task task){
+    public Action editTask(Task task){
 
         titleField.setText(task.title);
         descriptionField.setText(task.description);
@@ -44,25 +46,30 @@ public class EditComponentBox {
 
         window.showAndWait();
         if(isAccepted.get()){
-            task.setTitle(titleField.getText());
-            task.setDescription(descriptionField.getText());
-            task.setType(typeField.getText());
-            task.progressState = stateList.getValue();
-        }
-        clearFields();
-        return isAccepted.get();
-    }
-
-    public Task createTask(){
-
-        window.showAndWait();
-        if(isAccepted.get()){
-            Task result = new Task(
-                    Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
+            return new EditTaskAction(
+                    task,
                     titleField.getText(),
                     descriptionField.getText(),
                     typeField.getText(),
                     stateList.getValue()
+            );
+        }
+        clearFields();
+        return null;
+    }
+
+    public Action createTask(){
+
+        window.showAndWait();
+        if(isAccepted.get()){
+            Action result = new AddTaskAction(
+                    new Task(
+                        Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
+                        titleField.getText(),
+                        descriptionField.getText(),
+                        typeField.getText(),
+                        stateList.getValue()
+                    )
             );
             clearFields();
             return result;

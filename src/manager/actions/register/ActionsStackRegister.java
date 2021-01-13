@@ -15,7 +15,9 @@ public class ActionsStackRegister implements ActionsRegister {
 
     @Override
     public void revertLastAction(){
-        Action last = register.pop();
-        last.revert();
+        if(!register.isEmpty()) {
+            Action last = register.pop();
+            last.revert();
+        }
     }
 }

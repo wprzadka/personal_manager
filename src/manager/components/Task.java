@@ -61,11 +61,11 @@ public class Task extends ViewComponent {
     }
 
     public void moveStateToNext(){
-        progressState = progressState.next(progressState);
+        progressState = progressState.next();
     }
 
     public void moveStateToPrev(){
-        progressState = progressState.prev(progressState);
+        progressState = progressState.prev();
     }
 
     public void setNeedsReview(boolean isNeeded){
@@ -74,6 +74,18 @@ public class Task extends ViewComponent {
 
     public boolean needsReview(){
         return progressState.needsReview;
+    }
+
+    public TaskMemento save(){
+        return new TaskMemento(this, title, description, type, progressState);
+    }
+
+    public void restoreFrom(TaskMemento memento){
+        title = memento.getTitle();
+        description = memento.getDescription();
+        type = memento.getType();
+        progressState = memento.getProgressState();
+//        System.out.println("RESTORED: " + getIdentity());
     }
 
     @Override

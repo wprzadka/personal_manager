@@ -57,6 +57,9 @@ public class TableUserInterface implements UserInterface {
                 createOperationBarButton("Sync", 642, null),
                 createOperationBarButton("Filter", 333,
                         mouseEvent -> Configuration.getInstance().getMainEventsController().editFilterSettings()
+                ),
+                createOperationBarButton("Revert", 842,
+                        mouseEvent -> Configuration.getInstance().getMainEventsController().revertLastAction()
                 )
         );
 
