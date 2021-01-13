@@ -1,4 +1,4 @@
-package manager.actions.history;
+package manager.actions.register;
 
 import manager.actions.Action;
 

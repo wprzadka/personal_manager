@@ -1,7 +1,7 @@
 package manager.configuration;
 
-import manager.actions.history.ActionsRegister;
-import manager.actions.history.ActionsStackRegister;
+import manager.actions.register.ActionsRegister;
+import manager.actions.register.ActionsStackRegister;
 import manager.components.ContentContainer;
 import manager.components.TaskIdentitySupervisor;
 import manager.controller.MainEventsController;

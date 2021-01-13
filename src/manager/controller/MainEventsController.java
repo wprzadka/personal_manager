@@ -3,7 +3,7 @@ package manager.controller;
 
 import manager.actions.AddTaskAction;
 import manager.actions.EditTaskAction;
-import manager.actions.history.ActionsRegister;
+import manager.actions.register.ActionsRegister;
 import manager.components.Task;
 import manager.components.iteration.TaskFilter;
 import manager.components.iteration.ViewComponentIterator;
