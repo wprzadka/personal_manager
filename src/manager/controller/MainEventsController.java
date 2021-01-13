@@ -2,9 +2,9 @@ package manager.controller;
 
 
 import manager.actions.Action;
-import manager.actions.AddTaskAction;
-import manager.actions.EditTaskAction;
+import manager.actions.MoveTaskStateAction;
 import manager.actions.register.ActionsRegister;
+import manager.components.State;
 import manager.components.Task;
 import manager.components.iteration.TaskFilter;
 import manager.components.iteration.ViewComponentIterator;
@@ -40,13 +40,16 @@ public class MainEventsController {
                 destinationPosition[0] - sourcePosition[0],
                 destinationPosition[1] - sourcePosition[1]
         };
+        State newState = null;
         if(drag_vector[0] > dragSensitivity){
-            component.getTask().moveStateToNext();
+            newState = component.getTask().progressState.next();
         }else if(drag_vector[0] < -dragSensitivity){
-            component.getTask().moveStateToPrev();
+            newState = component.getTask().progressState.prev();
         }
-        actionsRegister.consumeAction(new EditTaskAction(component.getTask()));
-        refresh();
+        if(newState != null) {
+            actionsRegister.consumeAction(new MoveTaskStateAction(component.getTask(), newState));
+            refresh();
+        }
     }
 
     public void addNewComponent(){

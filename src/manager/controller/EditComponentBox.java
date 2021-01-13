@@ -11,7 +11,6 @@ import manager.actions.AddTaskAction;
 import manager.actions.EditTaskAction;
 import manager.components.State;
 import manager.components.Task;
-import manager.components.task_visualize.*;
 import manager.configuration.Configuration;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -47,11 +46,13 @@ public class EditComponentBox {
 
         window.showAndWait();
         if(isAccepted.get()){
-            task.setTitle(titleField.getText());
-            task.setDescription(descriptionField.getText());
-            task.setType(typeField.getText());
-            task.progressState = stateList.getValue();
-            return new EditTaskAction(task);
+            return new EditTaskAction(
+                    task,
+                    titleField.getText(),
+                    descriptionField.getText(),
+                    typeField.getText(),
+                    stateList.getValue()
+            );
         }
         clearFields();
         return null;
