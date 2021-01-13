@@ -16,6 +16,7 @@ public class Task extends ViewComponent {
     public State progressState;
 
     private long identity;
+    // not implemented
     private SubTask subComponents;
 
     public Task(long identity, String title, String description, String type, State state){
@@ -40,40 +41,9 @@ public class Task extends ViewComponent {
         return identity;
     }
 
+    // not implemented
     public TaskIterator iterator(){
         return new TaskIterator(subComponents);
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description){
-        this.description = description;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean moveStateTo(State next){
-        return progressState.changeStateIfAvailable(next);
-    }
-
-    public void moveStateToNext(){
-        progressState = progressState.next();
-    }
-
-    public void moveStateToPrev(){
-        progressState = progressState.prev();
-    }
-
-    public void setNeedsReview(boolean isNeeded){
-        progressState.setNeedsReview(isNeeded);
-    }
-
-    public boolean needsReview(){
-        return progressState.needsReview;
     }
 
     public TaskMemento save(){
