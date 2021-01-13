@@ -82,7 +82,7 @@ public class EditComponentBox {
         titleField.clear();
         descriptionField.clear();
         typeField.clear();
-        stateList.setValue(State.DONE);
+        stateList.setValue(State.TODO);
     }
 
     private Stage createWindow(){
