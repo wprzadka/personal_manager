@@ -16,6 +16,7 @@ public class Task extends ViewComponent {
     public State progressState;
 
     private long identity;
+    // not implemented
     private SubTask subComponents;
 
     public Task(long identity, String title, String description, String type, State state){
@@ -40,6 +41,7 @@ public class Task extends ViewComponent {
         return identity;
     }
 
+    // not implemented
     public TaskIterator iterator(){
         return new TaskIterator(subComponents);
     }

@@ -2,6 +2,7 @@ package manager.components;
 
 import java.util.ListIterator;
 
+// TODO not implemented
 public class TaskIterator {
 
 //    private ListIterator<Task> innerIterator;
