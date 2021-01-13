@@ -9,7 +9,6 @@ public class EditorViewDecorator extends ViewComponent {
         super(component);
     }
 
-    // TODO clone during edit?
     @Override
     public Pane draw() {
 
