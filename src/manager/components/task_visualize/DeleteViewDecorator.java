@@ -13,12 +13,15 @@ import manager.configuration.Configuration;
 
 public class DeleteViewDecorator extends ViewComponent{
 
-    private final Button button;
+    private final HBox deleteBox;
 
     public DeleteViewDecorator(ViewComponent component) {
         super(component);
 
-        button = createXButton();
+        deleteBox = new HBox();
+        deleteBox.getChildren().add(createXButton());
+        deleteBox.setAlignment(Pos.BASELINE_RIGHT);
+        deleteBox.setPadding(new Insets(5));
     }
 
     @Override
@@ -28,13 +31,7 @@ public class DeleteViewDecorator extends ViewComponent{
         ObservableList<Node> elements = FXCollections.observableArrayList(pane.getChildren());
         pane.getChildren().clear();
 
-        HBox line = new HBox();
-        line.getChildren().add(button);
-        line.setAlignment(Pos.BASELINE_RIGHT);
-        line.setPadding(new Insets(5));
-
-        pane.getChildren().add(line);
-
+        pane.getChildren().add(deleteBox);
         pane.getChildren().addAll(elements);
 
         return pane;
