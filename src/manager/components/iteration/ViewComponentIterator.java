@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 // Design Pattern Iterator
-public class ViewComponentIterator implements Iterator{
+public class ViewComponentIterator implements Iterator<ViewComponent>{
 
     ListIterator<ViewComponent> innerIterator;
     TaskFilter filter;
