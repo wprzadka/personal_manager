@@ -74,6 +74,11 @@ public class MainEventsController {
         }
     }
 
+    public void revertLastAction(){
+        actionsRegister.revertLastAction();
+        refresh();
+    }
+
     public void refresh(){
         userInterface.refreshTasks(new ViewComponentIterator(componentsList, filter));
     }
