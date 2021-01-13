@@ -19,8 +19,6 @@ public class DeleteTaskAction implements Action {
     public void execute() {
         if(Configuration.getInstance().getContentContainer().removeTask(target)) {
             Configuration.getInstance().getDbConnection().deleteTask(target);
-        }else{
-            System.out.println("Can't remove task");
         }
     }
 
