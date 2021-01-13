@@ -29,12 +29,12 @@ public enum State{
         return progressLevel;
     }
 
-    public State next(State current){
-        switch (current){
+    public State next(){
+        switch (this){
             case TODO:
                 return IN_PROGRESS;
             case IN_PROGRESS:
-                if (current.needsReview){
+                if (needsReview){
                     return REVIEW;
                 }
                 return DONE;
@@ -43,10 +43,10 @@ public enum State{
         }
     }
 
-    public State prev(State current){
-        switch (current){
+    public State prev(){
+        switch (this){
             case DONE:
-                if (current.needsReview){
+                if (needsReview){
                     return REVIEW;
                 }
                 return IN_PROGRESS;
