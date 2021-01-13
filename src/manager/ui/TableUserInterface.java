@@ -51,15 +51,15 @@ public class TableUserInterface implements UserInterface {
         HBox operationBar = new HBox();
 //        --module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml
         operationBar.getChildren().addAll(
-                createOperationBarButton("Add", 262,
+                createOperationBarButton("Revert ⬅", 833,
+                        mouseEvent -> Configuration.getInstance().getMainEventsController().revertLastAction()
+                ),
+                createOperationBarButton("Add ✚", 262,
                         mouseEvent -> Configuration.getInstance().getMainEventsController().addNewComponent()
                 ),
-                createOperationBarButton("Sync", 642, null),
-                createOperationBarButton("Filter", 333,
+//                createOperationBarButton("Sync", 642, null),
+                createOperationBarButton("Filter ☰", 333,
                         mouseEvent -> Configuration.getInstance().getMainEventsController().editFilterSettings()
-                ),
-                createOperationBarButton("Revert", 842,
-                        mouseEvent -> Configuration.getInstance().getMainEventsController().revertLastAction()
                 )
         );
 

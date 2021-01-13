@@ -38,7 +38,7 @@ public class DeleteViewDecorator extends ViewComponent{
     }
 
     private Button createXButton(){
-        var xButton = new Button("X");
+        var xButton = new Button("❌");
         xButton.setOnAction(
                 e -> Configuration.getInstance().getMainEventsController().deleteTask(getTask())
         );
