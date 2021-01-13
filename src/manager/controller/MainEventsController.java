@@ -2,6 +2,7 @@ package manager.controller;
 
 
 import manager.actions.Action;
+import manager.actions.DeleteTaskAction;
 import manager.actions.MoveTaskStateAction;
 import manager.actions.register.ActionsRegister;
 import manager.components.State;
@@ -67,6 +68,11 @@ public class MainEventsController {
             actionsRegister.consumeAction(action);
             refresh();
         }
+    }
+
+    public void deleteTask(Task task){
+        actionsRegister.consumeAction(new DeleteTaskAction(task));
+        refresh();
     }
 
     public void editFilterSettings(){

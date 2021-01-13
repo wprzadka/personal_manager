@@ -35,8 +35,8 @@ public class ContentContainer {
     }
 
     private ViewComponent createViewOfTask(Task task){
-        return new EditorViewDecorator(new DragViewDecorator(
-                        new BorderViewDecorator(new BackgroundViewDecorator(task))));
+        return new DeleteViewDecorator(new EditorViewDecorator(new DragViewDecorator(
+                        new BorderViewDecorator(new BackgroundViewDecorator(task)))));
     }
 
 }

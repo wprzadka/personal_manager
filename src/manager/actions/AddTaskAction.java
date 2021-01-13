@@ -23,8 +23,6 @@ public class AddTaskAction implements Action{
     public void revert() {
         if(Configuration.getInstance().getContentContainer().removeTask(target)) {
             Configuration.getInstance().getDbConnection().deleteTask(target);
-        }else{
-            System.out.println("Can't remove task");
         }
     }
 }
