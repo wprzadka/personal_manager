@@ -1,6 +1,7 @@
 package manager.controller;
 
 
+import manager.actions.Action;
 import manager.actions.AddTaskAction;
 import manager.actions.EditTaskAction;
 import manager.actions.register.ActionsRegister;
@@ -50,17 +51,17 @@ public class MainEventsController {
 
     public void addNewComponent(){
 
-        Task createdTask = editComponentBox.createTask();
-        if(createdTask != null) {
-            actionsRegister.consumeAction(new AddTaskAction(createdTask.getTask()));
+        Action action = editComponentBox.createTask();
+        if(action != null) {
+            actionsRegister.consumeAction(action);
             refresh();
         }
     }
 
     public void editTask(Task task){
-
-        if(editComponentBox.editTask(task)) {
-            actionsRegister.consumeAction(new EditTaskAction(task));
+        Action action = editComponentBox.editTask(task);
+        if(action != null) {
+            actionsRegister.consumeAction(action);
             refresh();
         }
     }

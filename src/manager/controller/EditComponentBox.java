@@ -6,6 +6,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import manager.actions.Action;
+import manager.actions.AddTaskAction;
+import manager.actions.EditTaskAction;
 import manager.components.State;
 import manager.components.Task;
 import manager.components.task_visualize.*;
@@ -35,7 +38,7 @@ public class EditComponentBox {
         window = createWindow();
     }
 
-    public boolean editTask(Task task){
+    public Action editTask(Task task){
 
         titleField.setText(task.title);
         descriptionField.setText(task.description);
@@ -48,21 +51,24 @@ public class EditComponentBox {
             task.setDescription(descriptionField.getText());
             task.setType(typeField.getText());
             task.progressState = stateList.getValue();
+            return new EditTaskAction(task);
         }
         clearFields();
-        return isAccepted.get();
+        return null;
     }
 
-    public Task createTask(){
+    public Action createTask(){
 
         window.showAndWait();
         if(isAccepted.get()){
-            Task result = new Task(
-                    Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
-                    titleField.getText(),
-                    descriptionField.getText(),
-                    typeField.getText(),
-                    stateList.getValue()
+            Action result = new AddTaskAction(
+                    new Task(
+                        Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
+                        titleField.getText(),
+                        descriptionField.getText(),
+                        typeField.getText(),
+                        stateList.getValue()
+                    )
             );
             clearFields();
             return result;
