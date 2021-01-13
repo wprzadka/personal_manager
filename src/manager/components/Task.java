@@ -76,6 +76,17 @@ public class Task extends ViewComponent {
         return progressState.needsReview;
     }
 
+    public TaskMemento save(){
+        return new TaskMemento(this, title, description, type, progressState);
+    }
+
+    public void restoreFrom(TaskMemento memento){
+        title = memento.getTitle();
+        description = memento.getDescription();
+        type = memento.getType();
+        progressState = memento.getProgressState();
+    }
+
     @Override
     public Task getTask(){
         return this;
