@@ -142,7 +142,7 @@ public class TableUserInterface implements UserInterface {
         while(iter.hasNext()){
             var component = iter.next();
             int columnNum = component.getTask().progressState.getStateLevel();
-            // TODO create especial column for unmatched states?
+            // TODO create special column for unmatched states?
             if (columnNum >= columns.size()){
                 columnNum = columns.size() - 1;
             }
