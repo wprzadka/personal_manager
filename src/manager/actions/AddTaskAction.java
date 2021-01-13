@@ -21,6 +21,10 @@ public class AddTaskAction implements Action{
 
     @Override
     public void revert() {
-// Todo remove
+        if(Configuration.getInstance().getContentContainer().removeTask(target)) {
+            Configuration.getInstance().getDbConnection().deleteTask(target);
+        }else{
+            System.out.println("Can't remove task");
+        }
     }
 }

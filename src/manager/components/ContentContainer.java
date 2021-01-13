@@ -24,6 +24,16 @@ public class ContentContainer {
         viewComponents.add(createViewOfTask(task));
     }
 
+    public boolean removeTask(Task task){
+        for(ViewComponent view : viewComponents){
+            if(view.getTask() == task){
+                viewComponents.remove(view);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private ViewComponent createViewOfTask(Task task){
         return new EditorViewDecorator(new DragViewDecorator(
                         new BorderViewDecorator(new BackgroundViewDecorator(task))));

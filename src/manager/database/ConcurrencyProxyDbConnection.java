@@ -33,6 +33,13 @@ public class ConcurrencyProxyDbConnection implements DbConnection{
     }
 
     @Override
+    public void deleteTask(Task taskToDelete) {
+        var thread = new Thread(() -> connection.deleteTask(taskToDelete));
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    @Override
     public void close() {
         connection.close();
     }

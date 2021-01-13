@@ -13,5 +13,7 @@ public interface DbConnection {
 
     void updateTask(Task taskToUpdate);
 
+    void deleteTask(Task taskToDelete);
+
     void close();
 }

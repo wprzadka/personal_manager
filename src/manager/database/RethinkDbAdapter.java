@@ -108,6 +108,20 @@ public class RethinkDbAdapter implements DbConnection {
     }
 
     @Override
+    public void deleteTask(Task taskToDelete) {
+        if(conn != null) {
+            try {
+                r.db("Content").table("tasks").get(taskToDelete.getIdentity()).delete().run(conn);
+            } catch (ReqlOpFailedError err) {
+                // try to create table
+                err.printStackTrace();
+            } catch (ReqlQueryLogicError err) {
+                err.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public void close(){
         if(conn != null) {
             conn.close();
