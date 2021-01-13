@@ -5,14 +5,12 @@ import manager.actions.Action;
 import manager.actions.DeleteTaskAction;
 import manager.actions.MoveTaskStateAction;
 import manager.actions.register.ActionsRegister;
+import manager.components.ContentContainer;
 import manager.components.State;
 import manager.components.Task;
 import manager.components.iteration.TaskFilter;
-import manager.components.iteration.ViewComponentIterator;
 import manager.components.task_visualize.*;
 import manager.ui.UserInterface;
-
-import java.util.List;
 
 public class MainEventsController {
 
@@ -20,19 +18,19 @@ public class MainEventsController {
     private final EditComponentBox editComponentBox = new EditComponentBox();
 
     private final UserInterface userInterface;
-    private final List<ViewComponent> componentsList;
+    private final ContentContainer components;
     private final ActionsRegister actionsRegister;
     private TaskFilter filter;
     private int dragSensitivity = 100;
 
     public MainEventsController(
-            UserInterface ui,
-            List<ViewComponent> components,
-            ActionsRegister history
+            UserInterface userInterface,
+            ContentContainer components,
+            ActionsRegister actionsRegister
     ){
-        userInterface = ui;
-        componentsList = components;
-        actionsRegister = history;
+        this.userInterface = userInterface;
+        this.components = components;
+        this.actionsRegister = actionsRegister;
     }
 
     public void moveComponent(ViewComponent component, double[] sourcePosition, double[] destinationPosition){
@@ -90,6 +88,6 @@ public class MainEventsController {
     }
 
     public void refresh(){
-        userInterface.refreshTasks(new ViewComponentIterator(componentsList, filter));
+        userInterface.refreshTasks(components.iterator(filter));
     }
 }

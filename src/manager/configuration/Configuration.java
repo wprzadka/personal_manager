@@ -33,7 +33,7 @@ public class Configuration {
         actionsRegister = new ActionsStackRegister();
         mainEventsController = new MainEventsController(
                 userInterface,
-                contentContainer.getViewComponents(),
+                contentContainer,
                 actionsRegister
         );
         taskIdentitySupervisor = new TaskIdentitySupervisor(contentContainer.getViewComponents());

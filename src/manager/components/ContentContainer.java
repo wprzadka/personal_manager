@@ -1,5 +1,8 @@
 package manager.components;
 
+import manager.components.iteration.AcceptAllFilter;
+import manager.components.iteration.TaskFilter;
+import manager.components.iteration.ViewComponentIterator;
 import manager.components.task_visualize.*;
 import manager.configuration.Configuration;
 
@@ -32,6 +35,14 @@ public class ContentContainer {
             }
         }
         return false;
+    }
+
+    public ViewComponentIterator iterator(TaskFilter filter){
+        return new ViewComponentIterator(viewComponents, filter);
+    }
+
+    public ViewComponentIterator iterator(){
+        return new ViewComponentIterator(viewComponents, null);
     }
 
     private ViewComponent createViewOfTask(Task task){
