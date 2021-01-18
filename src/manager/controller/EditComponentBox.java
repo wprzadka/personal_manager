@@ -44,9 +44,12 @@ public class EditComponentBox {
         typeField.setText(task.type);
         stateList.setValue(task.progressState);
 
+        isAccepted.set(false);
         window.showAndWait();
+
+        Action action = null;
         if(isAccepted.get()){
-            return new EditTaskAction(
+            action = new EditTaskAction(
                     task,
                     titleField.getText(),
                     descriptionField.getText(),
@@ -55,14 +58,16 @@ public class EditComponentBox {
             );
         }
         clearFields();
-        return null;
+        return action;
     }
 
     public Action createTask(){
-
+        isAccepted.set(false);
         window.showAndWait();
+
+        Action action = null;
         if(isAccepted.get()){
-            Action result = new AddTaskAction(
+            action = new AddTaskAction(
                     new Task(
                         Configuration.getInstance().getTaskIdentitySupervisor().nextIdentity(),
                         titleField.getText(),
@@ -72,10 +77,8 @@ public class EditComponentBox {
                     )
             );
             clearFields();
-            return result;
-        }else{
-            return null;
         }
+        return action;
     }
 
     private void clearFields(){
@@ -112,7 +115,6 @@ public class EditComponentBox {
         var cancelButton = new Button("cancel");
         cancelButton.setOnAction(
                 e -> {
-                    isAccepted.set(false);
                     window.close();
                 }
         );
